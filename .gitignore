@@ -25,7 +25,7 @@ lerna-debug.log*
 server/src/firebase/service-account.json
 
 # VSCode and JetBrains IDEs
-.vscode/*
+**/.vscode/
 !.vscode/extensions.json
 .idea
 
