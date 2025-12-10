@@ -1,5 +1,13 @@
+import { ThemeToggle } from "./components/custom/theme-toggle";
+import { ThemeProvider } from "./contexts/theme-provider/theme-provider";
+import NavigationBar from "./components/custom/navigation-bar";
+
 const App = () => {
-  return <div className="text-3xl underline">Hello world!</div>;
+  return (
+    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      <NavigationBar />
+    </ThemeProvider>
+  );
 };
 
 export default App;
