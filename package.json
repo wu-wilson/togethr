@@ -6,5 +6,8 @@
     "packages/*",
     "client",
     "server"
-  ]
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces"
+  }
 }
