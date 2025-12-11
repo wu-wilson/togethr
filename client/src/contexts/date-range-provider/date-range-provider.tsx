@@ -16,12 +16,16 @@ export const DateRangeProviderContext =
 export const DateRangeProvider = ({ children }: DateRangeProviderProps) => {
   const today = new Date();
 
-  const monthStart = new Date(today.getFullYear(), today.getMonth(), 1);
-  const monthEnd = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+  const start = new Date(
+    today.getFullYear(),
+    today.getMonth() - 1,
+    today.getDate()
+  );
+  const end = today;
 
   const [dateRange, setDateRange] = useState<DateRange>({
-    from: monthStart,
-    to: monthEnd,
+    from: start,
+    to: end,
   });
 
   return (

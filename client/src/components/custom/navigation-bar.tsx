@@ -9,18 +9,18 @@ const NavigationBar = () => {
 
   return (
     <div className="flex justify-center border-b sticky top-0 z-50 bg-background px-6 py-2">
-      <div className="flex justify-between items-center max-w-7xl w-full">
-        <div className="flex items-center gap-1">
+      <div className="flex justify-center md:justify-between items-center max-w-7xl w-full">
+        <div className="items-center gap-1 hidden md:flex">
           <Button variant="ghost" size="icon">
             <HeartHandshake className="size-5" />
           </Button>
-          <div className="hidden md:flex">
+          <>
             {sections.map((s) => (
               <Button key={s} size="sm" variant="ghost">
                 {s}
               </Button>
             ))}
-          </div>
+          </>
         </div>
         <div className="flex items-center gap-1">
           <DateRangePicker />
