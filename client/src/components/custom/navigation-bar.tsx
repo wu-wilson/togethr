@@ -22,9 +22,9 @@ const NavigationBar = () => {
             ))}
           </>
         </div>
-        <div className="flex items-center gap-1">
+        <div className="flex items-center">
           <DateRangePicker />
-          <Separator orientation="vertical" className="ml-2 my-1" />
+          <Separator orientation="vertical" className="ml-3.5 mr-1 my-1" />
           <ThemeToggle />
         </div>
       </div>
