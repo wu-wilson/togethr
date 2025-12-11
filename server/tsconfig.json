@@ -7,7 +7,11 @@
     "outDir": "dist",
     "esModuleInterop": true,
     "moduleResolution": "node",
-    "lib": ["ES2023"]
+    "lib": ["ES2023"],
+    "paths": {
+      "@/*": ["./src/*"],
+      "@shared-types/*": ["../shared-types/*"]
+    }
   },
-  "include": ["src"]
+  "include": ["src", "../shared-types"]
 }
