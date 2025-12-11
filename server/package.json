@@ -20,7 +20,7 @@
     "@types/express": "^5.0.6",
     "@types/node": "^24.10.1",
     "@types/pg": "^8.15.6",
-    "shared-types": "file:../packages/shared-types",
+    "@together/types": "file:../packages/types",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3"
   }
