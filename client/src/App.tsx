@@ -1,10 +1,13 @@
 import { ThemeProvider } from "./contexts/theme-provider/theme-provider";
+import { DateRangeProvider } from "./contexts/date-range-provider/date-range-provider";
 import NavigationBar from "./components/custom/navigation-bar";
 
 const App = () => {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-      <NavigationBar />
+      <DateRangeProvider>
+        <NavigationBar />
+      </DateRangeProvider>
     </ThemeProvider>
   );
 };

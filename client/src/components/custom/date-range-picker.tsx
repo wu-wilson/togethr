@@ -8,19 +8,10 @@ import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { ChevronDownIcon, Calendar as CalendarIcon } from "lucide-react";
 import { formatDate } from "date-fns";
-import type { DateRange } from "react-day-picker";
+import { useDateRange } from "@/hooks/useDateRange";
 
 const DateRangePicker = () => {
-  const today = new Date();
-
-  const monthStart = new Date(today.getFullYear(), today.getMonth(), 1);
-  const monthEnd = new Date(today.getFullYear(), today.getMonth() + 1, 0);
-
-  const [dateRange, setDateRange] = useState<DateRange | undefined>({
-    from: monthStart,
-    to: monthEnd,
-  });
-
+  const { dateRange, setDateRange } = useDateRange();
   const [open, setOpen] = useState(false);
 
   return (
@@ -41,7 +32,12 @@ const DateRangePicker = () => {
           </Button>
         </PopoverTrigger>
         <PopoverContent className="w-auto overflow-hidden p-0" align="start">
-          <Calendar mode="range" selected={dateRange} onSelect={setDateRange} />
+          <Calendar
+            mode="range"
+            selected={dateRange}
+            onSelect={setDateRange}
+            required={true}
+          />
         </PopoverContent>
       </Popover>
     </>
