@@ -9,9 +9,8 @@
     "moduleResolution": "node",
     "lib": ["ES2023"],
     "paths": {
-      "@/*": ["./src/*"],
-      "@shared-types/*": ["../shared-types/*"]
+      "@/*": ["./src/*"]
     }
   },
-  "include": ["src", "../shared-types"]
+  "include": ["src"]
 }

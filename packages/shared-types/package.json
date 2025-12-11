@@ -1,0 +1,11 @@
+{
+  "name": "@together/shared-types",
+  "version": "1.0.0",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -b"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  }
+}
