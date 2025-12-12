@@ -5,5 +5,11 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "moduleDetection": "force"
-  }
+  },
+  "files": [],
+  "references": [
+    { "path": "./packages/types" },
+    { "path": "./server" },
+    { "path": "./client" }
+  ]
 }

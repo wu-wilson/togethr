@@ -1,12 +1,11 @@
 import express from "express";
 import cors from "cors";
-import { json as bodyParser } from "body-parser";
 
 const app = express();
 app.use(cors());
-app.use(bodyParser());
+app.use(express.json());
 
-const PORT = 3000;
+const PORT = 5001;
 
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}...`);
