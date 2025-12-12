@@ -1,0 +1,19 @@
+FROM node:20-alpine
+
+WORKDIR /app
+
+COPY package*.json ./
+COPY tsconfig.json ./
+COPY server/package*.json ./server/
+COPY packages/types/package*.json ./packages/types/
+
+RUN npm install
+
+COPY packages ./packages
+COPY server ./server
+
+WORKDIR /app/server
+
+EXPOSE 5000
+
+CMD ["npm", "run", "dev"]

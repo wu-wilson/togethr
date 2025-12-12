@@ -1,13 +1,9 @@
 import { createContext, useEffect, useState } from "react";
 import type { Theme, ThemeProviderProps, ThemeProviderState } from "./types";
 
-const initialState: ThemeProviderState = {
-  theme: "dark",
-  setTheme: () => null,
-};
-
-export const ThemeProviderContext =
-  createContext<ThemeProviderState>(initialState);
+export const ThemeProviderContext = createContext<ThemeProviderState | null>(
+  null
+);
 
 export const ThemeProvider = ({
   children,

@@ -1,0 +1,19 @@
+FROM node:20-alpine
+
+WORKDIR /app
+
+COPY package*.json ./
+COPY tsconfig.json ./
+COPY client/package*.json ./client/
+COPY packages/types/package*.json ./packages/types/
+
+RUN npm install
+
+COPY packages ./packages
+COPY client ./client
+
+WORKDIR /app/client
+
+EXPOSE 5173
+
+CMD ["npm", "run", "dev", "--", "--host"]

@@ -16,11 +16,15 @@ services:
   server:
     build:
       context: .
-      dockerfile: server/Dockerfile
+      dockerfile: server/Dockerfile.dev
     ports:
       - "5001:5000"
+    volumes:
+      - ./server:/app/server
+      - ./packages:/app/packages
+      - /app/node_modules
     environment:
-      - NODE_ENV=production
+      - NODE_ENV=development
       - PORT=5000
       - DATABASE_URL=postgresql://postgres:postgres@db:5432/togethr
     depends_on:
@@ -29,9 +33,15 @@ services:
   client:
     build:
       context: .
-      dockerfile: client/Dockerfile
+      dockerfile: client/Dockerfile.dev
     ports:
-      - "3000:80"
+      - "3000:5173"
+    volumes:
+      - ./client:/app/client
+      - ./packages:/app/packages
+      - /app/client/node_modules
+    environment:
+      - NODE_ENV=development
     depends_on:
       - server
 

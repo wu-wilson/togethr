@@ -2,16 +2,8 @@ import { createContext, useState } from "react";
 import type { DateRangeProviderProps, DateRangeProviderState } from "./types";
 import type { DateRange } from "react-day-picker";
 
-const initialState: DateRangeProviderState = {
-  dateRange: {
-    from: new Date(),
-    to: new Date(),
-  },
-  setDateRange: () => null,
-};
-
 export const DateRangeProviderContext =
-  createContext<DateRangeProviderState>(initialState);
+  createContext<DateRangeProviderState | null>(null);
 
 export const DateRangeProvider = ({ children }: DateRangeProviderProps) => {
   const today = new Date();

@@ -8,5 +8,5 @@ export const useDateRange = () => {
     throw new Error("useDateRange must be used within a DateRangeProvider");
   }
 
-  return context;
+  return context!;
 };
