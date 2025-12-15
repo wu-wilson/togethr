@@ -12,6 +12,12 @@ services:
       - ./server/init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
       - "5433:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d togethr"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
 
   server:
     build:
@@ -21,10 +27,11 @@ services:
       - "5001:5000"
     environment:
       - NODE_ENV=production
-      - PORT=5000
       - DATABASE_URL=postgresql://postgres:postgres@db:5432/togethr
     depends_on:
-      - db
+      db:
+        condition: service_healthy
+    restart: on-failure
 
   client:
     build:
