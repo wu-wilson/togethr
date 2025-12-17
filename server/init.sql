@@ -12,7 +12,8 @@ DROP TABLE IF EXISTS transactions;
 CREATE TABLE members (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
-    email VARCHAR(255) UNIQUE NOT NULL,
+    surname VARCHAR(255) NOT NULL,
+    color VARCHAR(7) NOT NULL,
     created_at TIMESTAMPTZ DEFAULT NOW(),
     updated_at TIMESTAMPTZ DEFAULT NOW()
 );
@@ -21,6 +22,7 @@ CREATE TABLE members (
 CREATE TABLE categories (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
+    color VARCHAR(7) NOT NULL,
     created_at TIMESTAMPTZ DEFAULT NOW(),
     updated_at TIMESTAMPTZ DEFAULT NOW()
 );

@@ -2,7 +2,7 @@ import { ThemeProvider } from "./contexts/theme-provider/theme-provider";
 import { DateRangeProvider } from "./contexts/date-range-provider/date-range-provider";
 import { MembersProvider } from "./contexts/members-provider/members-provider";
 import NavigationBar from "./components/custom/navigation-bar";
-import Members from "./cards/Members";
+import Members from "./cards/members/Members";
 import { Suspense } from "react";
 import Loading from "@/components/custom/loading";
 import { ErrorBoundary } from "react-error-boundary";
@@ -13,7 +13,7 @@ const App = () => {
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <DateRangeProvider>
         <NavigationBar />
-        <div className="flex justify-center">
+        <div className="flex justify-center mt-4">
           <div className="flex max-w-7xl w-full flex-wrap">
             <ErrorBoundary
               fallback={<Error className="h-[calc(100vh-4rem)] w-full" />}
