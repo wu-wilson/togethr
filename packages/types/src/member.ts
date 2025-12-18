@@ -17,3 +17,12 @@ export type AddMemberResponse = {
   message: string;
   added: Member;
 };
+
+export type DeleteMemberParams = {
+  id: string;
+};
+
+export type DeleteMemberResponse = {
+  message: string;
+  deleted: Member;
+};

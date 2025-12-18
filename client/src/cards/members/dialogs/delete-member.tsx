@@ -1,33 +1,42 @@
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
 import { Trash2 } from "lucide-react";
-import type { Member } from "@together/types";
 import { Button } from "@/components/ui/button";
+import { useMembers } from "@/hooks/useMembers";
+import type { Member } from "@together/types";
+import * as z from "zod";
+import { deleteMember } from "@/services/members.service";
+import FormDialog from "@/components/custom/form-dialog/form-dialog";
 
-const DeleteMember = ({ member }: { member: Member }) => {
+const validator = z.object({
+  confirm: z.literal("DELETE", {
+    error: () => ({ message: "Type DELETE to confirm" }),
+  }),
+});
+
+const DeleteMemberDialog = ({ member }: { member: Member }) => {
+  const { members, setMembers } = useMembers();
+
+  const onSubmit = async () => {
+    await deleteMember({ id: String(member.id) });
+    setMembers(members.filter((m) => m.id !== member.id));
+  };
+
   return (
-    <Dialog>
-      <DialogTrigger asChild>
+    <FormDialog
+      trigger={
         <Button variant="ghost" size="icon">
           <Trash2 />
         </Button>
-      </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
-        <DialogHeader>
-          <DialogTitle>Delete Person</DialogTitle>
-          <DialogDescription>
-            Are you sure you want to remove this person? This cannot be undone.
-          </DialogDescription>
-        </DialogHeader>
-      </DialogContent>
-    </Dialog>
+      }
+      title="Delete Person"
+      description="Are you sure you want to remove this person? This cannot be undone."
+      schema={[{ type: "input", name: "confirm", placeholder: "DELETE" }]}
+      validator={validator}
+      onSubmit={onSubmit}
+      errorMsg="deleteMember() endpoint failed."
+      successMsg="Member deleted successfully."
+      loadingMsg="Deleting member..."
+    />
   );
 };
 
-export default DeleteMember;
+export default DeleteMemberDialog;

@@ -10,7 +10,7 @@ import type { ColumnDef } from "@tanstack/react-table";
 import type { Member } from "@together/types";
 import DataTable from "@/components/custom/data-table/data-table";
 import AddMemberDialog from "./dialogs/add-member";
-import DeleteMember from "./dialogs/delete-member";
+import DeleteMemberDialog from "./dialogs/delete-member";
 import EditMember from "./dialogs/edit-member";
 
 const dateFormatter = new Intl.DateTimeFormat("en-US", {
@@ -70,7 +70,7 @@ const Members = () => {
       header: "",
       cell: ({ row }) => (
         <div className="flex items-center justify-end">
-          <DeleteMember member={row.original} />
+          <DeleteMemberDialog member={row.original} />
           <EditMember member={row.original} />
         </div>
       ),

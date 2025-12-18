@@ -2,6 +2,8 @@ import { BASE_URL } from "./constants";
 import type {
   AddMemberPayload,
   AddMemberResponse,
+  DeleteMemberParams,
+  DeleteMemberResponse,
   Member,
 } from "@together/types";
 import axios from "axios";
@@ -18,5 +20,13 @@ export const addMember = async (payload: AddMemberPayload) => {
     `${MEMBERS_SERVICE_BASE_URL}/add`,
     payload
   );
+  return response.data;
+};
+
+export const deleteMember = async (params: DeleteMemberParams) => {
+  const response = await axios.delete<DeleteMemberResponse>(
+    `${MEMBERS_SERVICE_BASE_URL}/delete/${params.id}`
+  );
+
   return response.data;
 };
