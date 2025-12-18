@@ -1,7 +1,8 @@
-import { cn } from "@/lib/utils";
 import { TriangleAlert } from "lucide-react";
+import { cn } from "@/lib/utils";
+import type { ErrorProps } from "./types";
 
-const Error = ({ msg, className }: { msg?: string; className?: string }) => {
+const Error = ({ msg, className }: ErrorProps) => {
   return (
     <div
       className={cn(

@@ -1,7 +1,8 @@
 import { Spinner } from "@/components/ui/spinner";
 import { cn } from "@/lib/utils";
+import type { LoadingProps } from "./types";
 
-const Loading = ({ msg, className }: { msg?: string; className?: string }) => {
+const Loading = ({ msg, className }: LoadingProps) => {
   return (
     <div
       className={cn(

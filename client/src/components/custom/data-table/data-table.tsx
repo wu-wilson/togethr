@@ -3,7 +3,6 @@ import {
   getCoreRowModel,
   getPaginationRowModel,
   useReactTable,
-  type ColumnDef,
 } from "@tanstack/react-table";
 import {
   Table,
@@ -13,14 +12,12 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import type { DataTableProps } from "./types";
 
 const DataTable = <TData, TValue>({
   columns,
   data,
-}: {
-  columns: ColumnDef<TData, TValue>[];
-  data: TData[];
-}) => {
+}: DataTableProps<TData, TValue>) => {
   const table = useReactTable({
     data,
     columns,
