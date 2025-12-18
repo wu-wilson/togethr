@@ -6,5 +6,6 @@ const membersRouter = express.Router();
 membersRouter.get("/", util.getMembers);
 membersRouter.post("/add", util.addMember);
 membersRouter.delete("/delete/:id", util.deleteMember);
+membersRouter.patch("/update/:id", util.updateMember);
 
 export default membersRouter;

@@ -26,3 +26,18 @@ export type DeleteMemberResponse = {
   message: string;
   deleted: Member;
 };
+
+export type UpdateMemberParams = {
+  id: string;
+};
+
+export type UpdateMemberPayload = {
+  name: string;
+  surname: string;
+  color: string;
+};
+
+export type UpdateMemberResponse = {
+  message: string;
+  updated: Member;
+};

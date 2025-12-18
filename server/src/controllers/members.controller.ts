@@ -6,6 +6,9 @@ import type {
   DeleteMemberParams,
   DeleteMemberResponse,
   Member,
+  UpdateMemberParams,
+  UpdateMemberPayload,
+  UpdateMemberResponse,
 } from "../../../packages/types/src/member.js";
 
 export const getMembers = async (
@@ -89,6 +92,50 @@ export const deleteMember = async (
     });
   } catch (error) {
     console.error("Error deleting member:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+export const updateMember = async (
+  req: Request<UpdateMemberParams, UpdateMemberResponse, UpdateMemberPayload>,
+  res: Response<UpdateMemberResponse | { error: string }>
+) => {
+  const { id } = req.params;
+  const { name, surname, color } = req.body;
+
+  if (!id || !name || !surname || !color) {
+    res
+      .status(400)
+      .json({ error: "id, name, surname, and color are required" });
+    return;
+  }
+
+  try {
+    const {
+      rows: [updatedMember],
+    } = await pool.query(
+      `UPDATE members
+       SET
+        name = $2,
+        surname = $3,
+        color = $4,
+        updated_at = NOW()
+       WHERE id = $1
+       RETURNING *;`,
+      [id, name, surname, color]
+    );
+
+    if (!updatedMember) {
+      res.status(404).json({ error: "Member does not exist" });
+      return;
+    }
+
+    res.json({
+      message: "Member updated successfully",
+      updated: updatedMember,
+    });
+  } catch (error) {
+    console.error("Error updating member:", error);
     res.status(500).json({ error: "Internal server error" });
   }
 };

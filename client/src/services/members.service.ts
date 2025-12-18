@@ -5,6 +5,9 @@ import type {
   DeleteMemberParams,
   DeleteMemberResponse,
   Member,
+  UpdateMemberParams,
+  UpdateMemberPayload,
+  UpdateMemberResponse,
 } from "@together/types";
 import axios from "axios";
 
@@ -28,5 +31,16 @@ export const deleteMember = async (params: DeleteMemberParams) => {
     `${MEMBERS_SERVICE_BASE_URL}/delete/${params.id}`
   );
 
+  return response.data;
+};
+
+export const updateMember = async (
+  params: UpdateMemberParams,
+  payload: UpdateMemberPayload
+) => {
+  const response = await axios.patch<UpdateMemberResponse>(
+    `${MEMBERS_SERVICE_BASE_URL}/update/${params.id}`,
+    payload
+  );
   return response.data;
 };

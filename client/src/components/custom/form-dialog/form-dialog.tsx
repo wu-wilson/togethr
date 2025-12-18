@@ -16,7 +16,7 @@ import {
 import { useForm } from "@tanstack/react-form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import type { FormDialogProps } from "./types";
 import ColorPicker from "../color-picker/color-picker";
@@ -58,6 +58,12 @@ const FormDialog = ({
     },
   });
 
+  useEffect(() => {
+    if (open) {
+      form.reset();
+    }
+  }, [open]);
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>{trigger}</DialogTrigger>
@@ -97,10 +103,7 @@ const FormDialog = ({
                       )}
                       {schemaField.type === "color" && (
                         <ColorPicker
-                          id={field.name}
-                          placeholder={schemaField.placeholder}
                           value={field.state.value}
-                          onBlur={field.handleBlur}
                           onChange={(color) => field.handleChange(color)}
                           aria-invalid={isInvalid}
                         />
