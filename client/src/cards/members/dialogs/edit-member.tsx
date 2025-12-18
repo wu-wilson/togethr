@@ -30,7 +30,7 @@ const EditMember = ({ member }: { member: Member }) => {
       },
       {
         message: "You must change at least one value to submit.",
-        path: ["name"],
+        path: ["color"],
       }
     );
 
