@@ -9,7 +9,6 @@ import * as z from "zod";
 const validator = z.object({
   name: z.string().trim().min(1, "Name is required."),
   surname: z.string().trim().min(1, "Surname is required."),
-  color: z.string().trim().length(7, "Hex code must be exactly 7 characters."),
 });
 
 const AddMemberDialog = () => {
@@ -36,7 +35,12 @@ const AddMemberDialog = () => {
           name: "surname",
           placeholder: "Smith",
         },
-        { type: "input", name: "color", placeholder: "#ffffff" },
+        {
+          type: "color",
+          name: "color",
+          placeholder: "#ffffff",
+          defaultValue: "#ffffff",
+        },
       ]}
       validator={validator}
       onSubmit={onSubmit}

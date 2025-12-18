@@ -19,6 +19,7 @@ import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { toast } from "sonner";
 import type { FormDialogProps } from "./types";
+import ColorPicker from "../color-picker/color-picker";
 
 const FormDialog = ({
   trigger,
@@ -91,6 +92,16 @@ const FormDialog = ({
                           value={field.state.value}
                           onBlur={field.handleBlur}
                           onChange={(e) => field.handleChange(e.target.value)}
+                          aria-invalid={isInvalid}
+                        />
+                      )}
+                      {schemaField.type === "color" && (
+                        <ColorPicker
+                          id={field.name}
+                          placeholder={schemaField.placeholder}
+                          value={field.state.value}
+                          onBlur={field.handleBlur}
+                          onChange={(color) => field.handleChange(color)}
                           aria-invalid={isInvalid}
                         />
                       )}

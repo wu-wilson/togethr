@@ -16,7 +16,7 @@ export type FormDialogProps = {
 export type FormSchema = FormField[];
 
 type FormField = {
-  type: "input";
+  type: "input" | "color";
   name: string;
   placeholder: string;
   defaultValue?: string;

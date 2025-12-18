@@ -123,3 +123,24 @@
     cursor: pointer;
   }
 }
+
+.react-colorful {
+  width: 100% !important;
+  height: 10rem !important;
+}
+
+.react-colorful__hue {
+  height: 1rem !important;
+  margin-top: 0.5rem;
+  border-radius: 10px !important;
+}
+
+.react-colorful__saturation {
+  border-radius: 10px !important;
+}
+
+.react-colorful__saturation-pointer,
+.react-colorful__hue-pointer {
+  width: 1rem !important;
+  height: 1rem !important;
+}
