@@ -13,7 +13,7 @@ import {
   FieldGroup,
   FieldLabel,
 } from "@/components/ui/field";
-import { useForm, type FormValidationError } from "@tanstack/react-form";
+import { useForm } from "@tanstack/react-form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useEffect, useState } from "react";
