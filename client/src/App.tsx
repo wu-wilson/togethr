@@ -7,6 +7,7 @@ import Loading from "@/components/custom/loading/loading";
 import NavigationBar from "./components/custom/navigation-bar";
 import Members from "./cards/members/Members";
 import Categories from "./cards/categories/Categories";
+import Transactions from "./cards/transactions/Transactions";
 
 const App = () => {
   const { theme } = useTheme();
@@ -30,7 +31,7 @@ const App = () => {
             <Categories />
           </div>
           <div className="w-full max-w-7xl space-y-4 mt-4">
-            {/* Future Cards Here */}
+            <Transactions />
           </div>
         </div>
       )}

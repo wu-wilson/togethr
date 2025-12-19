@@ -50,10 +50,12 @@ const Categories = () => {
     <Card className="w-full">
       <CardHeader>
         <CardTitle>Categories</CardTitle>
-        <CardDescription>Manage your transaction categories.</CardDescription>
+        <CardDescription>
+          Organize your spending into custom groups.
+        </CardDescription>
       </CardHeader>
       <CardContent>
-        <DataTable columns={columns} data={categories} />
+        <DataTable columns={columns} data={categories!} />
         <AddCategoryDialog />
       </CardContent>
     </Card>

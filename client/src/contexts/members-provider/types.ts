@@ -6,7 +6,7 @@ export type MembersProviderProps = {
 };
 
 export type MembersProviderState = {
-  members: Member[];
+  members: Member[] | null;
   setMembers: (member: Member[]) => void;
   loading: boolean;
   error: string | null;

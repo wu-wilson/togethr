@@ -59,7 +59,7 @@ const Members = () => {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <DataTable columns={columns} data={members} />
+        <DataTable columns={columns} data={members!} />
         <AddMemberDialog />
       </CardContent>
     </Card>

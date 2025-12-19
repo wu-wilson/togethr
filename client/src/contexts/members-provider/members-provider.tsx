@@ -3,13 +3,11 @@ import { fetchMembers } from "@/services/members.service";
 import type { MembersProviderProps, MembersProviderState } from "./types";
 import type { Member } from "@together/types";
 
-const fetchedMembers = fetchMembers();
-
 export const MembersProviderContext =
   createContext<MembersProviderState | null>(null);
 
 export const MembersProvider = ({ children }: MembersProviderProps) => {
-  const [members, setMembers] = useState<Member[]>(use(fetchedMembers));
+  const [members, setMembers] = useState<Member[] | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
