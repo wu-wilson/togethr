@@ -6,3 +6,8 @@ export type Transaction = {
   amount: number;
   transaction_date: Date;
 };
+
+export type GetTransactionsParams = {
+  start: string;
+  end: string;
+};
