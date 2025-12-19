@@ -9,12 +9,6 @@ import * as z from "zod";
 const validator = z.object({
   name: z.string().trim().min(1, "Name is required."),
   surname: z.string().trim().min(1, "Surname is required."),
-  color: z
-    .string()
-    .regex(
-      /^#([0-9a-fA-F]{6}|[0-9a-fA-F]{3})$/,
-      "Color must be a valid hex color."
-    ),
 });
 
 const AddMemberDialog = () => {
