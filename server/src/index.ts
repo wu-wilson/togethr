@@ -1,6 +1,7 @@
 import { Pool } from "pg";
 import membersRouter from "./routers/members.router.js";
 import categoriesRouter from "./routers/categories.router.js";
+import transactionsRouter from "./routers/transactions.router.js";
 import express from "express";
 import cors from "cors";
 
@@ -33,6 +34,7 @@ testDbConnection();
 
 app.use("/members", membersRouter);
 app.use("/categories", categoriesRouter);
+app.use("/transactions", transactionsRouter);
 
 const PORT = 5000;
 
