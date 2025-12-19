@@ -1,7 +1,8 @@
 import { Toaster } from "sonner";
 import { useTheme } from "./hooks/useTheme";
-import { useCategories } from "./hooks/useCategories";
 import { useMembers } from "./hooks/useMembers";
+import { useCategories } from "./hooks/useCategories";
+import { useTransactions } from "./hooks/useTransactions";
 import Error from "./components/custom/error/error";
 import Loading from "@/components/custom/loading/loading";
 import NavigationBar from "./components/custom/navigation-bar";
@@ -14,9 +15,10 @@ const App = () => {
 
   const members = useMembers();
   const categories = useCategories();
+  const transactions = useTransactions();
 
-  const loading = members.loading || categories.loading;
-  const error = members.error || categories.error;
+  const loading = members.loading || categories.loading || transactions.loading;
+  const error = members.error || categories.error || transactions.error;
 
   return (
     <>
