@@ -25,16 +25,14 @@ const App = () => {
             <Suspense
               fallback={<Loading className="h-[calc(100vh-4rem)] w-full" />}
             >
-              <MembersProvider>
-                <Members />
-                <CategoriesProvider>
-                  <Categories />
-                </CategoriesProvider>
-              </MembersProvider>
+              <Members />
+              <Categories />
             </Suspense>
           </ErrorBoundary>
         </div>
-        <div className="flex flex-col gap-4 mt-4 w-full max-w-7xl"></div>
+        <div className="w-full max-w-7xl space-y-4 mt-4">
+          {/* Future Cards Here */}
+        </div>
       </div>
     </>
   );
