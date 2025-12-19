@@ -8,4 +8,6 @@ export type MembersProviderProps = {
 export type MembersProviderState = {
   members: Member[];
   setMembers: (member: Member[]) => void;
+  loading: boolean;
+  error: string | null;
 };

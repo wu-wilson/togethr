@@ -8,6 +8,6 @@ export type Transaction = {
 };
 
 export type GetTransactionsParams = {
-  start: string;
-  end: string;
+  from: string;
+  to: string;
 };

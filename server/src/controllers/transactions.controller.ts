@@ -6,10 +6,10 @@ export const getTransactions = async (
   req: Request,
   res: Response<Transaction[] | { error: string }>
 ) => {
-  const { start, end } = req.query;
+  const { from, to } = req.query;
 
-  if (!start || !end) {
-    res.status(400).json({ error: "start and end are required" });
+  if (!from || !to) {
+    res.status(400).json({ error: "from and to are required" });
     return;
   }
 
@@ -22,7 +22,7 @@ export const getTransactions = async (
         transactions.transaction_date >= $1 AND 
         transactions.transaction_date <= $2
       `,
-      [start, end]
+      [from, to]
     );
     res.json(transactions);
   } catch (error) {

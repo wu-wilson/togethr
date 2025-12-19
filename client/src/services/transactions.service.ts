@@ -9,8 +9,8 @@ export const fetchTransactions = async (params: GetTransactionsParams) => {
     TRANSACTIONS_SERVICE_BASE_URL,
     {
       params: {
-        start: params.start,
-        end: params.end,
+        from: params.from,
+        to: params.to,
       },
     }
   );

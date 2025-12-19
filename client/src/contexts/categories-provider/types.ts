@@ -6,6 +6,8 @@ export type CategoriesProviderProps = {
 };
 
 export type CategoriesProviderState = {
-  categories: Category[];
+  categories: Category[] | null;
   setCategories: (categories: Category[]) => void;
+  loading: boolean;
+  error: string | null;
 };
