@@ -1,4 +1,4 @@
-import { useMembers } from "@/hooks/useMembers";
+import { useCategories } from "@/hooks/useCategories";
 import {
   Card,
   CardContent,
@@ -7,23 +7,19 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import type { ColumnDef } from "@tanstack/react-table";
-import type { Member } from "@together/types";
+import type { Category } from "@together/types";
 import DataTable from "@/components/custom/data-table/data-table";
-import AddMemberDialog from "./dialogs/add-member";
-import DeleteMemberDialog from "./dialogs/delete-member";
-import EditMemberDialog from "./dialogs/edit-member";
+import AddCategoryDialog from "./dialogs/add-category";
+import DeleteCategoryDialog from "./dialogs/delete-category";
+import EditCategoryDialog from "./dialogs/edit-category";
 
-const Members = () => {
-  const { members } = useMembers();
+const Categories = () => {
+  const { categories } = useCategories();
 
-  const columns: ColumnDef<Member>[] = [
+  const columns: ColumnDef<Category>[] = [
     {
       accessorKey: "name",
       header: "Name",
-    },
-    {
-      accessorKey: "surname",
-      header: "Surname",
     },
     {
       accessorKey: "color",
@@ -43,8 +39,8 @@ const Members = () => {
       header: "",
       cell: ({ row }) => (
         <div className="flex items-center justify-end">
-          <DeleteMemberDialog member={row.original} />
-          <EditMemberDialog member={row.original} />
+          <DeleteCategoryDialog category={row.original} />
+          <EditCategoryDialog category={row.original} />
         </div>
       ),
     },
@@ -53,17 +49,15 @@ const Members = () => {
   return (
     <Card className="w-full">
       <CardHeader>
-        <CardTitle>People</CardTitle>
-        <CardDescription>
-          Manage the people you're budgeting for.
-        </CardDescription>
+        <CardTitle>Categories</CardTitle>
+        <CardDescription>Manage your transaction categories.</CardDescription>
       </CardHeader>
       <CardContent>
-        <DataTable columns={columns} data={members} />
-        <AddMemberDialog />
+        <DataTable columns={columns} data={categories} />
+        <AddCategoryDialog />
       </CardContent>
     </Card>
   );
 };
 
-export default Members;
+export default Categories;

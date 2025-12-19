@@ -6,13 +6,13 @@ import type { Member, UpdateMemberPayload } from "@together/types";
 import FormDialog from "@/components/custom/form-dialog/form-dialog";
 import * as z from "zod";
 
-const EditMember = ({ member }: { member: Member }) => {
-  const { members, setMembers } = useMembers();
+const validator = z.object({
+  name: z.string().trim().min(1, "Name is required."),
+  surname: z.string().trim().min(1, "Surname is required."),
+});
 
-  const validator = z.object({
-    name: z.string().trim().min(1, "Name is required."),
-    surname: z.string().trim().min(1, "Surname is required."),
-  });
+const EditMemberDialog = ({ member }: { member: Member }) => {
+  const { members, setMembers } = useMembers();
 
   const onSubmit = async (payload: Record<string, string>) => {
     const { updated } = await updateMember(
@@ -60,4 +60,4 @@ const EditMember = ({ member }: { member: Member }) => {
   );
 };
 
-export default EditMember;
+export default EditMemberDialog;

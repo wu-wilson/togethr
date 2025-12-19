@@ -5,6 +5,4 @@ export type Transaction = {
   description?: string | null;
   amount: number;
   transaction_date: Date;
-  created_at: Date;
-  updated_at: Date;
 };

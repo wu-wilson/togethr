@@ -13,18 +13,14 @@ CREATE TABLE members (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     surname VARCHAR(255) NOT NULL,
-    color VARCHAR(7) NOT NULL,
-    created_at TIMESTAMPTZ DEFAULT NOW(),
-    updated_at TIMESTAMPTZ DEFAULT NOW()
+    color VARCHAR(7) NOT NULL
 );
 
 -- Create categories table
 CREATE TABLE categories (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
-    color VARCHAR(7) NOT NULL,
-    created_at TIMESTAMPTZ DEFAULT NOW(),
-    updated_at TIMESTAMPTZ DEFAULT NOW()
+    color VARCHAR(7) NOT NULL
 );
 
 -- Create transactions table
@@ -34,7 +30,5 @@ CREATE TABLE transactions (
     category_id INT REFERENCES categories(id) ON DELETE SET NULL,
     description TEXT,
     amount NUMERIC(12, 2) NOT NULL CHECK (amount >= 0),
-    transaction_date DATE NOT NULL,
-    created_at TIMESTAMPTZ DEFAULT NOW(),
-    updated_at TIMESTAMPTZ DEFAULT NOW()
+    transaction_date DATE NOT NULL
 );

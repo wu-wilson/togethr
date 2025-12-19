@@ -35,8 +35,8 @@ export const addMember = async (
 ) => {
   const { name, surname, color } = req.body;
 
-  if (!name || !surname) {
-    res.status(400).json({ error: "name and surname are required" });
+  if (!name || !surname || !color) {
+    res.status(400).json({ error: "name, surname, and color are required" });
     return;
   }
 
@@ -119,7 +119,6 @@ export const updateMember = async (
         name = $2,
         surname = $3,
         color = $4,
-        updated_at = NOW()
        WHERE id = $1
        RETURNING *;`,
       [id, name, surname, color]

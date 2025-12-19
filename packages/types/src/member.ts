@@ -3,8 +3,6 @@ export type Member = {
   name: string;
   surname: string;
   color: string;
-  created_at: string;
-  updated_at: string;
 };
 
 export type AddMemberPayload = {
