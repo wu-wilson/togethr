@@ -1,8 +1,6 @@
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { Toaster } from "sonner";
-import { MembersProvider } from "./contexts/members-provider/members-provider";
-import { CategoriesProvider } from "./contexts/categories-provider/categories-provider";
 import { useTheme } from "./hooks/useTheme";
 import Error from "./components/custom/error/error";
 import Loading from "@/components/custom/loading/loading";
