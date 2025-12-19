@@ -37,7 +37,11 @@ export const TransactionsProvider = ({
     if (loading) {
       getTransactions();
     }
-  }, []);
+  }, [loading]);
+
+  useEffect(() => {
+    setLoading(true);
+  }, [dateRange]);
 
   return (
     <TransactionsProviderContext.Provider
