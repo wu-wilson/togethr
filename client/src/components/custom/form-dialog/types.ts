@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 
 type BaseField<T> = {
   name: string;
-  defaultValue: T;
+  defaultValue?: T;
   placeholder?: T;
 };
 
@@ -29,18 +29,18 @@ type DropdownField<T> = BaseField<T> & {
   label: (value: T) => string;
 };
 
-type FormField<T> =
+type FormField =
   | TextField
   | CurrencyField
   | ColorField
   | DateField
-  | DropdownField<T>;
+  | DropdownField<any>;
 
-export type FormDialogProps<TDropdownEntity, TFormData> = {
+export type FormDialogProps<TFormData> = {
   trigger: ReactNode;
   title: string;
   description: string;
-  schema: FormField<TDropdownEntity>[];
+  schema: FormField[];
   validator?: FormValidateOrFn<TFormData>;
   onSubmit: (values: TFormData) => Promise<void>;
   errorMsg: string;

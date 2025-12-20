@@ -13,15 +13,27 @@ import {
   FieldGroup,
   FieldLabel,
 } from "@/components/ui/field";
-import { useForm, type DeepValue, type Updater } from "@tanstack/react-form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import type { FormDialogProps } from "./types";
 import ColorPicker from "../color-picker/color-picker";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { DollarSign } from "lucide-react";
+import { DatePicker } from "../date-picker";
+import { useForm, type DeepValue, type Updater } from "@tanstack/react-form";
+import type { FormDialogProps } from "./types";
+import { format } from "date-fns";
 
-const FormDialog = <TFormData, TDropdownEntity = string>({
+const FormDialog = <TFormData,>({
   trigger,
   title,
   description,
@@ -31,7 +43,7 @@ const FormDialog = <TFormData, TDropdownEntity = string>({
   errorMsg,
   loadingMsg,
   successMsg,
-}: FormDialogProps<TDropdownEntity, TFormData>) => {
+}: FormDialogProps<TFormData>) => {
   const [open, setOpen] = useState<boolean>(false);
 
   const defaultValues = Object.fromEntries(
@@ -116,6 +128,78 @@ const FormDialog = <TFormData, TDropdownEntity = string>({
                             )
                           }
                           aria-invalid={isInvalid}
+                        />
+                      )}
+                      {schemaField.type === "dropdown" && (
+                        <Select
+                          value={
+                            field.state.value
+                              ? (field.state.value as string)
+                              : ""
+                          }
+                          onValueChange={(val) =>
+                            field.handleChange(
+                              val as Updater<DeepValue<TFormData, string>>
+                            )
+                          }
+                        >
+                          <SelectTrigger
+                            className="w-full"
+                            aria-invalid={isInvalid}
+                          >
+                            <SelectValue placeholder="Select" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectGroup>
+                              <SelectLabel className="capitalize">
+                                {field.name}
+                              </SelectLabel>
+                              {schemaField.options.map((option) => (
+                                <SelectItem
+                                  key={schemaField.label(option)}
+                                  value={schemaField.label(option)}
+                                >
+                                  {schemaField.label(option)}
+                                </SelectItem>
+                              ))}
+                            </SelectGroup>
+                          </SelectContent>
+                        </Select>
+                      )}
+                      {schemaField.type === "currency" && (
+                        <div className="relative">
+                          <DollarSign className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                          <Input
+                            aria-invalid={isInvalid}
+                            type="number"
+                            step="0.01"
+                            placeholder="0.00"
+                            min="0"
+                            className="pl-9"
+                            value={(field.state.value as string) ?? ""}
+                            onBlur={field.handleBlur}
+                            onChange={(e) =>
+                              field.handleChange(
+                                e.target.value as Updater<
+                                  DeepValue<TFormData, string>
+                                >
+                              )
+                            }
+                          />
+                        </div>
+                      )}
+                      {schemaField.type === "date" && (
+                        <DatePicker
+                          value={
+                            field.state.value
+                              ? new Date(field.state.value as string)
+                              : new Date()
+                          }
+                          onSelect={(date) =>
+                            field.handleChange(
+                              date as Updater<DeepValue<TFormData, string>>
+                            )
+                          }
                         />
                       )}
                       {isInvalid && (

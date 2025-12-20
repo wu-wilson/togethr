@@ -8,18 +8,31 @@ import {
 } from "@/components/ui/card";
 import { useCategories } from "@/hooks/useCategories";
 import { useTransactions } from "@/hooks/useTransactions";
+import { useMembers } from "@/hooks/useMembers";
+import { format } from "date-fns";
 import type { ColumnDef } from "@tanstack/react-table";
 import type { Transaction } from "@together/types";
 import AddTransactionDialog from "./dialogs/add-transaction";
+import DeleteTransactionDialog from "./dialogs/delete-transaction";
+import EditTransactionDialog from "./dialogs/edit-transaction";
 
 const Transactions = () => {
   const { transactions } = useTransactions();
   const { categories } = useCategories();
+  const { members } = useMembers();
 
   const columns: ColumnDef<Transaction>[] = [
     {
       accessorKey: "amount",
       header: "Amount",
+      cell: ({ row }) => {
+        const amount = parseFloat(row.getValue("amount"));
+
+        return new Intl.NumberFormat("en-US", {
+          style: "currency",
+          currency: "USD",
+        }).format(amount);
+      },
     },
     {
       accessorKey: "category_id",
@@ -30,11 +43,38 @@ const Transactions = () => {
     },
     {
       accessorKey: "member_id",
-      header: "Made By",
+      header: "Person",
+      cell: ({ row }) => {
+        const member = members!.find(
+          (m) => m.id === row.getValue("category_id")
+        );
+        return member ? `${member.name} ${member.surname}` : "Unassigned";
+      },
     },
     {
       accessorKey: "transaction_date",
       header: "Date",
+      cell: ({ row }) => {
+        const dateValue = new Date(row.getValue("transaction_date"));
+
+        const date = new Date(
+          dateValue.getUTCFullYear(),
+          dateValue.getUTCMonth(),
+          dateValue.getUTCDate()
+        );
+
+        return format(date, "PPP");
+      },
+    },
+    {
+      accessorKey: "actions",
+      header: "",
+      cell: ({ row }) => (
+        <div className="flex items-center justify-end">
+          <DeleteTransactionDialog transaction={row.original} />
+          <EditTransactionDialog transaction={row.original} />
+        </div>
+      ),
     },
   ];
 
