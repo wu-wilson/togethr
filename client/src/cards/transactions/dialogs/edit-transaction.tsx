@@ -35,8 +35,6 @@ const EditTransactionDialog = ({
   const { members } = useMembers();
 
   const onSubmit = async (metadata: Record<string, string | number | Date>) => {
-    console.log(metadata);
-
     const payload = {
       member_id: members!.find(
         (m) => `${m.name} ${m.surname}` === metadata.person
