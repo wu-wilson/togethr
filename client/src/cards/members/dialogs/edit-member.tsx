@@ -19,7 +19,7 @@ const EditMemberDialog = ({ member }: { member: Member }) => {
       { id: String(member.id) },
       payload as UpdateMemberPayload
     );
-    setMembers(members.map((m) => (m.id === updated.id ? updated : m)));
+    setMembers(members!.map((m) => (m.id === updated.id ? updated : m)));
   };
 
   return (
@@ -33,13 +33,13 @@ const EditMemberDialog = ({ member }: { member: Member }) => {
       description="Update the person's information below and save your changes."
       schema={[
         {
-          type: "input",
+          type: "text",
           name: "name",
           placeholder: "John",
           defaultValue: member.name,
         },
         {
-          type: "input",
+          type: "text",
           name: "surname",
           placeholder: "Smith",
           defaultValue: member.surname,

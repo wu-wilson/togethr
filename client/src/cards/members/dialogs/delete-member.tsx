@@ -17,7 +17,7 @@ const DeleteMemberDialog = ({ member }: { member: Member }) => {
 
   const onSubmit = async () => {
     await deleteMember({ id: String(member.id) });
-    setMembers(members.filter((m) => m.id !== member.id));
+    setMembers(members!.filter((m) => m.id !== member.id));
   };
 
   return (
@@ -29,7 +29,14 @@ const DeleteMemberDialog = ({ member }: { member: Member }) => {
       }
       title="Delete Person"
       description="Are you sure you want to remove this person? This cannot be undone."
-      schema={[{ type: "input", name: "confirm", placeholder: "DELETE" }]}
+      schema={[
+        {
+          type: "text",
+          name: "confirm",
+          placeholder: "DELETE",
+          defaultValue: "",
+        },
+      ]}
       validator={validator}
       onSubmit={onSubmit}
       errorMsg="deleteMember() endpoint failed."

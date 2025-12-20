@@ -13,7 +13,7 @@ import {
   FieldGroup,
   FieldLabel,
 } from "@/components/ui/field";
-import { useForm } from "@tanstack/react-form";
+import { useForm, type DeepValue, type Updater } from "@tanstack/react-form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useEffect, useState } from "react";
@@ -21,7 +21,7 @@ import { toast } from "sonner";
 import type { FormDialogProps } from "./types";
 import ColorPicker from "../color-picker/color-picker";
 
-const FormDialog = ({
+const FormDialog = <TFormData, TDropdownEntity = string>({
   trigger,
   title,
   description,
@@ -31,12 +31,12 @@ const FormDialog = ({
   errorMsg,
   loadingMsg,
   successMsg,
-}: FormDialogProps) => {
+}: FormDialogProps<TDropdownEntity, TFormData>) => {
   const [open, setOpen] = useState<boolean>(false);
 
   const defaultValues = Object.fromEntries(
-    schema.map(({ name, defaultValue }) => [name, defaultValue ?? ""])
-  );
+    schema.map(({ name, defaultValue }) => [name, defaultValue])
+  ) as TFormData;
 
   const form = useForm({
     defaultValues: defaultValues,
@@ -91,20 +91,30 @@ const FormDialog = ({
                       <FieldLabel htmlFor={field.name} className="capitalize">
                         {field.name}
                       </FieldLabel>
-                      {schemaField.type === "input" && (
+                      {schemaField.type === "text" && (
                         <Input
                           id={field.name}
                           placeholder={schemaField.placeholder}
-                          value={field.state.value}
+                          value={field.state.value as string}
                           onBlur={field.handleBlur}
-                          onChange={(e) => field.handleChange(e.target.value)}
+                          onChange={(e) =>
+                            field.handleChange(
+                              e.target.value as Updater<
+                                DeepValue<TFormData, string>
+                              >
+                            )
+                          }
                           aria-invalid={isInvalid}
                         />
                       )}
                       {schemaField.type === "color" && (
                         <ColorPicker
-                          value={field.state.value}
-                          onChange={(color) => field.handleChange(color)}
+                          value={field.state.value as string}
+                          onChange={(color) =>
+                            field.handleChange(
+                              color as Updater<DeepValue<TFormData, string>>
+                            )
+                          }
                           aria-invalid={isInvalid}
                         />
                       )}

@@ -16,7 +16,7 @@ const AddMemberDialog = () => {
 
   const onSubmit = async (payload: Record<string, string>) => {
     const { added } = await addMember(payload as AddMemberPayload);
-    setMembers([...members, added]);
+    setMembers([...members!, added]);
   };
 
   return (
@@ -29,11 +29,12 @@ const AddMemberDialog = () => {
       title="Add Person"
       description="Add a new person by filling out the details below."
       schema={[
-        { type: "input", name: "name", placeholder: "John" },
+        { type: "text", name: "name", placeholder: "John", defaultValue: "" },
         {
-          type: "input",
+          type: "text",
           name: "surname",
           placeholder: "Smith",
+          defaultValue: "",
         },
         {
           type: "color",

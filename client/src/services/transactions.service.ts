@@ -1,5 +1,10 @@
 import { BASE_URL } from "./constants";
-import type { GetTransactionsParams, Transaction } from "@together/types";
+import type {
+  AddTransactionPayload,
+  AddTransactionResponse,
+  GetTransactionsParams,
+  Transaction,
+} from "@together/types";
 import axios from "axios";
 
 const TRANSACTIONS_SERVICE_BASE_URL = BASE_URL + "/transactions";
@@ -13,6 +18,14 @@ export const fetchTransactions = async (params: GetTransactionsParams) => {
         to: params.to,
       },
     }
+  );
+  return response.data;
+};
+
+export const addTransaction = async (payload: AddTransactionPayload) => {
+  const response = await axios.post<AddTransactionResponse>(
+    `${TRANSACTIONS_SERVICE_BASE_URL}/add`,
+    payload
   );
   return response.data;
 };

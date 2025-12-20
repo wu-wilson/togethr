@@ -28,7 +28,6 @@ CREATE TABLE transactions (
     id SERIAL PRIMARY KEY,
     member_id INT NOT NULL REFERENCES members(id) ON DELETE CASCADE,
     category_id INT REFERENCES categories(id) ON DELETE SET NULL,
-    description TEXT,
     amount NUMERIC(12, 2) NOT NULL CHECK (amount >= 0),
     transaction_date DATE NOT NULL
 );

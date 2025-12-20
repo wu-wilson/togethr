@@ -15,7 +15,7 @@ const AddCategoryDialog = () => {
 
   const onSubmit = async (payload: Record<string, string>) => {
     const { added } = await addCategory(payload as AddCategoryPayload);
-    setCategories([...categories, added]);
+    setCategories([...categories!, added]);
   };
 
   return (
@@ -28,7 +28,12 @@ const AddCategoryDialog = () => {
       title="Add Category"
       description="Add a new category by filling out the details below."
       schema={[
-        { type: "input", name: "name", placeholder: "Groceries" },
+        {
+          type: "text",
+          name: "name",
+          placeholder: "Groceries",
+          defaultValue: "",
+        },
         {
           type: "color",
           name: "color",

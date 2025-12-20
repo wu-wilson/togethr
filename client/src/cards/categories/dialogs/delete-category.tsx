@@ -17,7 +17,7 @@ const DeleteCategoryDialog = ({ category }: { category: Category }) => {
 
   const onSubmit = async () => {
     await deleteCategory({ id: String(category.id) });
-    setCategories(categories.filter((c) => c.id !== category.id));
+    setCategories(categories!.filter((c) => c.id !== category.id));
   };
 
   return (
@@ -29,7 +29,14 @@ const DeleteCategoryDialog = ({ category }: { category: Category }) => {
       }
       title="Delete Category"
       description="Are you sure you want to remove this category? This cannot be undone."
-      schema={[{ type: "input", name: "confirm", placeholder: "DELETE" }]}
+      schema={[
+        {
+          type: "text",
+          name: "confirm",
+          placeholder: "DELETE",
+          defaultValue: "",
+        },
+      ]}
       validator={validator}
       onSubmit={onSubmit}
       errorMsg="deleteCategory() endpoint failed."

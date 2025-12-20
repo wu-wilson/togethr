@@ -18,7 +18,7 @@ const EditCategoryDialog = ({ category }: { category: Category }) => {
       { id: String(category.id) },
       payload as UpdateCategoryPayload
     );
-    setCategories(categories.map((c) => (c.id === updated.id ? updated : c)));
+    setCategories(categories!.map((c) => (c.id === updated.id ? updated : c)));
   };
 
   return (
@@ -32,7 +32,7 @@ const EditCategoryDialog = ({ category }: { category: Category }) => {
       description="Update the category's metadata below and save your changes."
       schema={[
         {
-          type: "input",
+          type: "text",
           name: "name",
           placeholder: "Groceries",
           defaultValue: category.name,
