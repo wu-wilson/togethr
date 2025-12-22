@@ -133,12 +133,10 @@ export const updateTransaction = async (
     isNaN(amount) ||
     !transaction_date
   ) {
-    res
-      .status(400)
-      .json({
-        error:
-          "id, member_id, category_id, amount, and transaction_date are required",
-      });
+    res.status(400).json({
+      error:
+        "id, member_id, category_id, amount, and transaction_date are required",
+    });
     return;
   }
 

@@ -46,9 +46,11 @@ const EditMemberDialog = ({ member }: { member: Member }) => {
       ]}
       validator={validator}
       onSubmit={onSubmit}
-      errorMsg="updateMember() endpoint failed."
-      successMsg="Member updated successfully."
-      loadingMsg="Updating member..."
+      toastMsgs={{
+        error: "updateMember() endpoint failed.",
+        success: "Member updated successfully.",
+        loading: "Updating member...",
+      }}
     />
   );
 };

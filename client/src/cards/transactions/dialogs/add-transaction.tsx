@@ -4,7 +4,7 @@ import { CirclePlus } from "lucide-react";
 import { useTransactions } from "@/hooks/useTransactions";
 import { useCategories } from "@/hooks/useCategories";
 import { useMembers } from "@/hooks/useMembers";
-import type { AddTransactionPayload, Category, Member } from "@together/types";
+import type { AddTransactionPayload } from "@together/types";
 import FormDialog from "@/components/custom/form-dialog/form-dialog";
 import z from "zod";
 
@@ -15,9 +15,7 @@ const validator = z.object({
   category: z.string({
     message: "Category is required.",
   }),
-  amount: z.string({
-    message: "Amount is required.",
-  }),
+  amount: z.string().trim().min(1, "Amount is required."),
 });
 
 const AddTransactionDialog = () => {
@@ -25,25 +23,15 @@ const AddTransactionDialog = () => {
   const { categories } = useCategories();
   const { members } = useMembers();
 
-  const onSubmit = async (metadata: Record<string, string | number | Date>) => {
+  const onSubmit = async (metadata: Record<string, string>) => {
     const payload = {
-      member_id: members!.find(
-        (m) => `${m.name} ${m.surname}` === metadata.person
-      )!.id,
+      member_id: members!.find((m) => m.name === metadata.person)!.id,
       category_id: categories!.find((c) => c.name === metadata.category)!.id,
       amount: Number(metadata.amount),
       transaction_date: metadata.date,
     };
     const { added } = await addTransaction(payload as AddTransactionPayload);
     setTransactions([...transactions!, added]);
-  };
-
-  const getMemberLabel = (m: Member) => {
-    return `${m.name} ${m.surname}`;
-  };
-
-  const getCategoryLabel = (c: Category) => {
-    return c.name;
   };
 
   return (
@@ -59,30 +47,36 @@ const AddTransactionDialog = () => {
         {
           type: "dropdown",
           name: "person",
-          options: members!,
-          label: getMemberLabel,
+          options: members!.map((m) => m.name),
+          defaultValue: members!.length > 0 ? members![0].name : undefined,
+          placeholder: "Select person",
         },
         {
           type: "dropdown",
           name: "category",
-          options: categories!,
-          label: getCategoryLabel,
+          options: categories!.map((c) => c.name),
+          defaultValue:
+            categories!.length > 0 ? categories![0].name : undefined,
+          placeholder: "Select category",
         },
         {
           type: "currency",
           name: "amount",
+          placeholder: "0.00",
         },
         {
           type: "date",
           name: "date",
-          defaultValue: new Date(),
+          defaultValue: new Date().toISOString(),
         },
       ]}
       validator={validator}
       onSubmit={onSubmit}
-      errorMsg="addTransaction() endpoint failed."
-      successMsg="Transaction added successfully."
-      loadingMsg="Adding transaction..."
+      toastMsgs={{
+        error: "addTransaction() endpoint failed.",
+        success: "Transaction added successfully.",
+        loading: "Adding transaction...",
+      }}
     />
   );
 };

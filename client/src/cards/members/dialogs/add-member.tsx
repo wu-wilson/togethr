@@ -32,7 +32,6 @@ const AddMemberDialog = () => {
           type: "text",
           name: "name",
           placeholder: "John Smith",
-          defaultValue: "",
         },
         {
           type: "color",
@@ -43,9 +42,11 @@ const AddMemberDialog = () => {
       ]}
       validator={validator}
       onSubmit={onSubmit}
-      errorMsg="addMember() endpoint failed."
-      successMsg="Member added successfully."
-      loadingMsg="Adding member..."
+      toastMsgs={{
+        error: "addMember() endpoint failed.",
+        success: "Member added successfully.",
+        loading: "Adding member...",
+      }}
     />
   );
 };

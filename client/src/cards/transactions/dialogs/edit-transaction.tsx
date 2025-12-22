@@ -3,15 +3,10 @@ import { Button } from "@/components/ui/button";
 import { useTransactions } from "@/hooks/useTransactions";
 import { useCategories } from "@/hooks/useCategories";
 import { useMembers } from "@/hooks/useMembers";
-import type {
-  Category,
-  Member,
-  Transaction,
-  UpdateTransactionPayload,
-} from "@together/types";
+import { updateTransaction } from "@/services/transactions.service";
+import type { Transaction, UpdateTransactionPayload } from "@together/types";
 import FormDialog from "@/components/custom/form-dialog/form-dialog";
 import * as z from "zod";
-import { updateTransaction } from "@/services/transactions.service";
 
 const validator = z.object({
   person: z.string({
@@ -34,11 +29,9 @@ const EditTransactionDialog = ({
   const { categories } = useCategories();
   const { members } = useMembers();
 
-  const onSubmit = async (metadata: Record<string, string | number | Date>) => {
+  const onSubmit = async (metadata: Record<string, string>) => {
     const payload = {
-      member_id: members!.find(
-        (m) => `${m.name} ${m.surname}` === metadata.person
-      )!.id,
+      member_id: members!.find((m) => m.name === metadata.person)!.id,
       category_id: categories!.find((c) => c.name === metadata.category)!.id,
       amount: Number(metadata.amount),
       transaction_date: metadata.date,
@@ -54,26 +47,6 @@ const EditTransactionDialog = ({
     );
   };
 
-  const getMemberLabel = (m: Member) => {
-    return `${m.name} ${m.surname}`;
-  };
-
-  const getCategoryLabel = (c: Category) => {
-    return c.name;
-  };
-
-  const getDefaultDate = () => {
-    const dateValue = new Date(transaction.transaction_date);
-
-    const date = new Date(
-      dateValue.getUTCFullYear(),
-      dateValue.getUTCMonth(),
-      dateValue.getUTCDate()
-    );
-
-    return date;
-  };
-
   return (
     <FormDialog
       trigger={
@@ -87,37 +60,36 @@ const EditTransactionDialog = ({
         {
           type: "dropdown",
           name: "person",
-          options: members!,
-          label: getMemberLabel,
-          defaultValue: getMemberLabel(
-            members!.find((m) => m.id === transaction.member_id)!
-          ),
+          options: members!.map((m) => m.name),
+          defaultValue: members!.find((m) => m.id === transaction.member_id)!
+            .name,
         },
         {
           type: "dropdown",
           name: "category",
-          options: categories!,
-          label: getCategoryLabel,
-          defaultValue: getCategoryLabel(
-            categories!.find((c) => c.id === transaction.category_id)!
-          ),
+          options: categories!.map((c) => c.name),
+          defaultValue: categories!.find(
+            (c) => c.id === transaction.category_id
+          )!.name,
         },
         {
           type: "currency",
           name: "amount",
-          defaultValue: transaction.amount,
+          defaultValue: String(transaction.amount),
         },
         {
           type: "date",
           name: "date",
-          defaultValue: getDefaultDate(),
+          defaultValue: transaction.transaction_date,
         },
       ]}
       validator={validator}
       onSubmit={onSubmit}
-      errorMsg="updateTransaction() endpoint failed."
-      successMsg="Transaction updated successfully."
-      loadingMsg="Updating transaction..."
+      toastMsgs={{
+        error: "updateTransaction() endpoint failed.",
+        success: "Transaction updated successfully.",
+        loading: "Updating transaction...",
+      }}
     />
   );
 };

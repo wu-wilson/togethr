@@ -46,9 +46,11 @@ const EditCategoryDialog = ({ category }: { category: Category }) => {
       ]}
       validator={validator}
       onSubmit={onSubmit}
-      errorMsg="updateCategory() endpoint failed."
-      successMsg="Category updated successfully."
-      loadingMsg="Updating category..."
+      toastMsgs={{
+        error: "updateCategory() endpoint failed.",
+        success: "Category updated successfully.",
+        loading: "Updating category...",
+      }}
     />
   );
 };

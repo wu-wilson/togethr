@@ -43,9 +43,11 @@ const AddCategoryDialog = () => {
       ]}
       validator={validator}
       onSubmit={onSubmit}
-      errorMsg="addCategory() endpoint failed."
-      successMsg="Category added successfully."
-      loadingMsg="Adding category..."
+      toastMsgs={{
+        error: "addCategory() endpoint failed.",
+        success: "Category added successfully.",
+        loading: "Adding category...",
+      }}
     />
   );
 };

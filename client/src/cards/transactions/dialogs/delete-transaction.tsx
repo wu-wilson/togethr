@@ -38,14 +38,15 @@ const DeleteTransactionDialog = ({
           type: "text",
           name: "confirm",
           placeholder: "DELETE",
-          defaultValue: "",
         },
       ]}
       validator={validator}
       onSubmit={onSubmit}
-      errorMsg="deleteTransaction() endpoint failed."
-      successMsg="Transaction deleted successfully."
-      loadingMsg="Deleting transaction..."
+      toastMsgs={{
+        error: "deleteTransaction() endpoint failed.",
+        success: "Transaction deleted successfully.",
+        loading: "Deleting transaction...",
+      }}
     />
   );
 };

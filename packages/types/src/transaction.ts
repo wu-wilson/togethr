@@ -3,7 +3,7 @@ export type Transaction = {
   member_id: number;
   category_id?: number | null;
   amount: number;
-  transaction_date: Date;
+  transaction_date: string;
 };
 
 export type GetTransactionsParams = {
@@ -15,7 +15,7 @@ export type AddTransactionPayload = {
   member_id: number;
   category_id: number;
   amount: number;
-  transaction_date: Date;
+  transaction_date: string;
 };
 
 export type AddTransactionResponse = {
@@ -40,7 +40,7 @@ export type UpdateTransactionPayload = {
   member_id: number;
   category_id: number;
   amount: number;
-  transaction_date: Date;
+  transaction_date: string;
 };
 
 export type UpdateTransactionResponse = {

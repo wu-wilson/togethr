@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ChevronDownIcon } from "lucide-react";
-import { format } from "date-fns";
+import { formatInTimeZone } from "date-fns-tz";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import {
@@ -27,7 +27,7 @@ export const DatePicker = ({
           id="date"
           className="w-full justify-between font-normal"
         >
-          {value ? format(value, "PPP") : "Select date"}
+          {value ? formatInTimeZone(value, "UTC", "PPP") : "Select date"}
           <ChevronDownIcon />
         </Button>
       </PopoverTrigger>

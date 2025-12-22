@@ -48,22 +48,22 @@ const Transactions = () => {
         const member = members!.find(
           (m) => m.id === row.getValue("category_id")
         );
-        return member ? `${member.name} ${member.surname}` : "Unassigned";
+        return member ? member.name : "Unassigned";
       },
     },
     {
       accessorKey: "transaction_date",
       header: "Date",
       cell: ({ row }) => {
-        const dateValue = new Date(row.getValue("transaction_date"));
+        const date = new Date(row.getValue("transaction_date"));
 
-        const date = new Date(
-          dateValue.getUTCFullYear(),
-          dateValue.getUTCMonth(),
-          dateValue.getUTCDate()
+        const localDate = new Date(
+          date.getUTCFullYear(),
+          date.getUTCMonth(),
+          date.getUTCDate()
         );
 
-        return format(date, "PPP");
+        return format(localDate, "PPP");
       },
     },
     {

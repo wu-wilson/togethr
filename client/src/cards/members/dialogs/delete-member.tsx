@@ -34,14 +34,15 @@ const DeleteMemberDialog = ({ member }: { member: Member }) => {
           type: "text",
           name: "confirm",
           placeholder: "DELETE",
-          defaultValue: "",
         },
       ]}
       validator={validator}
       onSubmit={onSubmit}
-      errorMsg="deleteMember() endpoint failed."
-      successMsg="Member deleted successfully."
-      loadingMsg="Deleting member..."
+      toastMsgs={{
+        error: "deleteMember() endpoint failed.",
+        success: "Member deleted successfully.",
+        loading: "Deleting member...",
+      }}
     />
   );
 };

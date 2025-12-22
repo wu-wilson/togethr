@@ -1,10 +1,10 @@
 import { Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useCategories } from "@/hooks/useCategories";
-import type { Category } from "@together/types";
-import * as z from "zod";
 import { deleteCategory } from "@/services/categories.service";
+import type { Category } from "@together/types";
 import FormDialog from "@/components/custom/form-dialog/form-dialog";
+import * as z from "zod";
 
 const validator = z.object({
   confirm: z.literal("DELETE", {
@@ -39,9 +39,11 @@ const DeleteCategoryDialog = ({ category }: { category: Category }) => {
       ]}
       validator={validator}
       onSubmit={onSubmit}
-      errorMsg="deleteCategory() endpoint failed."
-      successMsg="Category deleted successfully."
-      loadingMsg="Deleting category..."
+      toastMsgs={{
+        error: "deleteCategory() endpoint failed.",
+        success: "Category deleted successfully.",
+        loading: "Deleting category...",
+      }}
     />
   );
 };
