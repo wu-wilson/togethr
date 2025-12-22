@@ -22,10 +22,6 @@ const Members = () => {
       header: "Name",
     },
     {
-      accessorKey: "surname",
-      header: "Surname",
-    },
-    {
       accessorKey: "color",
       header: "Color",
       cell: ({ row }) => (

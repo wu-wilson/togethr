@@ -8,7 +8,6 @@ import * as z from "zod";
 
 const validator = z.object({
   name: z.string().trim().min(1, "Name is required."),
-  surname: z.string().trim().min(1, "Surname is required."),
 });
 
 const EditMemberDialog = ({ member }: { member: Member }) => {
@@ -37,12 +36,6 @@ const EditMemberDialog = ({ member }: { member: Member }) => {
           name: "name",
           placeholder: "John",
           defaultValue: member.name,
-        },
-        {
-          type: "text",
-          name: "surname",
-          placeholder: "Smith",
-          defaultValue: member.surname,
         },
         {
           type: "color",

@@ -8,7 +8,6 @@ import * as z from "zod";
 
 const validator = z.object({
   name: z.string().trim().min(1, "Name is required."),
-  surname: z.string().trim().min(1, "Surname is required."),
 });
 
 const AddMemberDialog = () => {
@@ -29,11 +28,10 @@ const AddMemberDialog = () => {
       title="Add Person"
       description="Add a new person by filling out the details below."
       schema={[
-        { type: "text", name: "name", placeholder: "John", defaultValue: "" },
         {
           type: "text",
-          name: "surname",
-          placeholder: "Smith",
+          name: "name",
+          placeholder: "John Smith",
           defaultValue: "",
         },
         {

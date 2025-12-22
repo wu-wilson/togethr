@@ -33,10 +33,10 @@ export const addMember = async (
   req: Request<{}, AddMemberResponse, AddMemberPayload>,
   res: Response<AddMemberResponse | { error: string }>
 ) => {
-  const { name, surname, color } = req.body;
+  const { name, color } = req.body;
 
-  if (!name || !surname || !color) {
-    res.status(400).json({ error: "name, surname, and color are required" });
+  if (!name || !color) {
+    res.status(400).json({ error: "name and color are required" });
     return;
   }
 
@@ -44,10 +44,10 @@ export const addMember = async (
     const {
       rows: [addedMember],
     } = await pool.query(
-      `INSERT INTO members (name, surname, color)
-       VALUES ($1, $2, $3)
+      `INSERT INTO members (name, color)
+       VALUES ($1, $2)
        RETURNING *`,
-      [name, surname, color]
+      [name, color]
     );
 
     res.status(201).json({
@@ -101,12 +101,10 @@ export const updateMember = async (
   res: Response<UpdateMemberResponse | { error: string }>
 ) => {
   const { id } = req.params;
-  const { name, surname, color } = req.body;
+  const { name, color } = req.body;
 
-  if (!id || !name || !surname || !color) {
-    res
-      .status(400)
-      .json({ error: "id, name, surname, and color are required" });
+  if (!id || !name || !color) {
+    res.status(400).json({ error: "id, name, and color are required" });
     return;
   }
 
@@ -117,11 +115,10 @@ export const updateMember = async (
       `UPDATE members
        SET
         name = $2,
-        surname = $3,
-        color = $4,
+        color = $3
        WHERE id = $1
        RETURNING *;`,
-      [id, name, surname, color]
+      [id, name, color]
     );
 
     if (!updatedMember) {

@@ -1,13 +1,11 @@
 export type Member = {
   id: number;
   name: string;
-  surname: string;
   color: string;
 };
 
 export type AddMemberPayload = {
   name: string;
-  surname: string;
   color: string;
 };
 
@@ -31,7 +29,6 @@ export type UpdateMemberParams = {
 
 export type UpdateMemberPayload = {
   name: string;
-  surname: string;
   color: string;
 };
 
