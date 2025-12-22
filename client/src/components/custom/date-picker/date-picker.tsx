@@ -8,14 +8,9 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import type { DatePickerProps } from "./types";
 
-export const DatePicker = ({
-  value,
-  onSelect,
-}: {
-  value: Date;
-  onSelect: (date: Date) => void;
-}) => {
+export const DatePicker = ({ value, onSelect }: DatePickerProps) => {
   const [open, setOpen] = useState(false);
 
   return (
