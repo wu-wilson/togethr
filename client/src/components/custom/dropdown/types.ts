@@ -1,4 +1,5 @@
 export type DropdownProps = {
+  id: string;
   label: string;
   options: string[];
   value: string;

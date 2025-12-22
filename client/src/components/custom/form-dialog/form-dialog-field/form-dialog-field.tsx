@@ -10,18 +10,14 @@ import CurrencyInput from "../../currency-input/currency-input";
 const FormDialogField = ({ field, config }: FormDialogFieldProps) => {
   const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
 
-  const sharedProps = {
-    id: field.name,
-    "aria-invalid": isInvalid,
-  };
-
   const renderer: Record<string, () => JSX.Element | null> = {
     text: () => (
       <Input
-        {...sharedProps}
+        id={field.name}
         value={field.state.value}
         placeholder={config.placeholder}
         onChange={(e) => field.handleChange(e.target.value)}
+        aria-invalid={isInvalid}
       />
     ),
     currency: () => (
@@ -35,18 +31,21 @@ const FormDialogField = ({ field, config }: FormDialogFieldProps) => {
     ),
     color: () => (
       <ColorPicker
+        id={field.name}
         value={field.state.value}
         onChange={(color) => field.handleChange(color)}
       />
     ),
     date: () => (
       <DatePicker
+        id={field.name}
         value={new Date(field.state.value)}
         onSelect={(date) => field.handleChange(date.toISOString())}
       />
     ),
     dropdown: () => (
       <Dropdown
+        id={field.name}
         label={field.name}
         options={
           (
@@ -58,6 +57,7 @@ const FormDialogField = ({ field, config }: FormDialogFieldProps) => {
         }
         value={field.state.value}
         onValueChange={(o: string) => field.handleChange(o)}
+        invalid={isInvalid}
       />
     ),
   };

@@ -10,12 +10,12 @@ import {
 } from "@/components/ui/popover";
 import type { DatePickerProps } from "./types";
 
-export const DatePicker = ({ value, onSelect }: DatePickerProps) => {
+export const DatePicker = ({ id, value, onSelect }: DatePickerProps) => {
   const [open, setOpen] = useState(false);
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild>
+      <PopoverTrigger asChild id={id}>
         <Button
           aria-invalid={true}
           variant="outline"

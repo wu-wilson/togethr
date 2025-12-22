@@ -8,12 +8,12 @@ import { useState } from "react";
 import { HexColorPicker } from "react-colorful";
 import type { ColorPickerProps } from "./types";
 
-const ColorPicker = ({ value, onChange }: ColorPickerProps) => {
+const ColorPicker = ({ id, value, onChange }: ColorPickerProps) => {
   const [open, setOpen] = useState(false);
 
   return (
     <Popover open={open} onOpenChange={setOpen} modal={true}>
-      <PopoverTrigger asChild>
+      <PopoverTrigger asChild id={id}>
         <Button variant="outline">
           <div className="flex w-full items-center gap-2">
             <div

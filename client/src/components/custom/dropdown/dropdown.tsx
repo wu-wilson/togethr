@@ -10,6 +10,7 @@ import {
 import type { DropdownProps } from "./types";
 
 const Dropdown = ({
+  id,
   label,
   options,
   value,
@@ -19,7 +20,7 @@ const Dropdown = ({
 }: DropdownProps) => {
   return (
     <Select value={value} onValueChange={onValueChange}>
-      <SelectTrigger className="w-full" aria-invalid={invalid}>
+      <SelectTrigger id={id} className="w-full" aria-invalid={invalid}>
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
       <SelectContent>
