@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ChevronDownIcon } from "lucide-react";
-import { formatInTimeZone } from "date-fns-tz";
+import { format } from "date-fns";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import {
@@ -9,6 +9,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import type { DatePickerProps } from "./types";
+import { DateTime } from "luxon";
 
 export const DatePicker = ({ id, value, onSelect }: DatePickerProps) => {
   const [open, setOpen] = useState(false);
@@ -22,7 +23,11 @@ export const DatePicker = ({ id, value, onSelect }: DatePickerProps) => {
           id="date"
           className="w-full justify-between font-normal"
         >
-          {value ? formatInTimeZone(value, "UTC", "PPP") : "Select date"}
+          {value
+            ? DateTime.fromJSDate(value)
+                .toUTC()
+                .toLocaleString(DateTime.DATE_FULL)
+            : "Select date"}
           <ChevronDownIcon />
         </Button>
       </PopoverTrigger>

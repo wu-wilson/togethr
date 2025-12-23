@@ -9,7 +9,7 @@ import {
 import { useCategories } from "@/hooks/useCategories";
 import { useTransactions } from "@/hooks/useTransactions";
 import { useMembers } from "@/hooks/useMembers";
-import { format } from "date-fns";
+import { DateTime } from "luxon";
 import type { ColumnDef } from "@tanstack/react-table";
 import type { Transaction } from "@together/types";
 import AddTransactionDialog from "./dialogs/add-transaction";
@@ -54,17 +54,10 @@ const Transactions = () => {
     {
       accessorKey: "transaction_date",
       header: "Date",
-      cell: ({ row }) => {
-        const date = new Date(row.getValue("transaction_date"));
-
-        const localDate = new Date(
-          date.getUTCFullYear(),
-          date.getUTCMonth(),
-          date.getUTCDate()
-        );
-
-        return format(localDate, "PPP");
-      },
+      cell: ({ row }) =>
+        DateTime.fromISO(row.getValue("transaction_date"), {
+          zone: "utc",
+        }).toLocaleString(DateTime.DATE_FULL),
     },
     {
       accessorKey: "actions",

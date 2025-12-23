@@ -1,6 +1,7 @@
 import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { DatePicker } from "../../date-picker/date-picker";
+import { DateTime } from "luxon";
 import type { FormDialogFieldProps } from "./types";
 import type { JSX } from "react";
 import ColorPicker from "../../color-picker/color-picker";
@@ -39,8 +40,10 @@ const FormDialogField = ({ field, config }: FormDialogFieldProps) => {
     date: () => (
       <DatePicker
         id={field.name}
-        value={new Date(field.state.value)}
-        onSelect={(date) => field.handleChange(date.toISOString())}
+        value={DateTime.fromISO(field.state.value).toJSDate()}
+        onSelect={(date) => {
+          field.handleChange(DateTime.fromJSDate(date).toISODate());
+        }}
       />
     ),
     dropdown: () => (

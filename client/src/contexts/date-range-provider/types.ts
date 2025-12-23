@@ -1,8 +1,12 @@
 import type { ReactNode } from "react";
-import type { DateRange } from "react-day-picker";
 
 export type DateRangeProviderProps = {
   children: ReactNode;
+};
+
+export type DateRange = {
+  from: string | null;
+  to: string | null;
 };
 
 export type DateRangeProviderState = {

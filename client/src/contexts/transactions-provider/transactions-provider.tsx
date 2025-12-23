@@ -22,8 +22,8 @@ export const TransactionsProvider = ({
   const getTransactions = async () => {
     try {
       const fetchedTransactions = await fetchTransactions({
-        from: dateRange.from!.toISOString(),
-        to: dateRange.to!.toISOString(),
+        from: dateRange.from!,
+        to: dateRange.to!,
       });
       setTransactions(fetchedTransactions);
     } catch {

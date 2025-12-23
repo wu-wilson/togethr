@@ -4,6 +4,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { DateTime } from "luxon";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { ChevronDownIcon, Calendar as CalendarIcon } from "lucide-react";
@@ -16,7 +17,10 @@ const DateRangePicker = () => {
 
   const [selectedDateRange, setSelectedDateRange] = useState<
     DateRange | undefined
-  >(dateRange);
+  >({
+    from: DateTime.fromISO(dateRange.from!).toJSDate(),
+    to: DateTime.fromISO(dateRange.to!).toJSDate(),
+  });
 
   const [open, setOpen] = useState(false);
 
@@ -26,7 +30,10 @@ const DateRangePicker = () => {
 
   const handleApply = () => {
     if (selectedDateRange?.from && selectedDateRange.to) {
-      setDateRange(selectedDateRange);
+      setDateRange({
+        from: DateTime.fromJSDate(selectedDateRange.from).toISODate(),
+        to: DateTime.fromJSDate(selectedDateRange.to).toISODate(),
+      });
     }
     setOpen(false);
   };
@@ -38,9 +45,10 @@ const DateRangePicker = () => {
           <div className="flex items-center gap-3">
             <CalendarIcon />
             {dateRange?.from && dateRange.to
-              ? `${formatDate(dateRange.from, "MM/dd/yyyy")} - ${formatDate(
-                  dateRange.to,
-                  "MM/dd/yyyy"
+              ? `${DateTime.fromISO(dateRange.from).toLocaleString(
+                  DateTime.DATE_SHORT
+                )} - ${DateTime.fromISO(dateRange.to).toLocaleString(
+                  DateTime.DATE_SHORT
                 )}`
               : "Select date range"}
           </div>
@@ -55,7 +63,9 @@ const DateRangePicker = () => {
           mode="range"
           numberOfMonths={2}
           selected={selectedDateRange}
-          defaultMonth={dateRange.from}
+          defaultMonth={DateTime.fromISO(dateRange.from!, {
+            zone: "utc",
+          }).toJSDate()}
           onSelect={setSelectedDateRange}
           disabled={{ after: new Date() }}
         />

@@ -7,6 +7,7 @@ import { updateTransaction } from "@/services/transactions.service";
 import type { Transaction, UpdateTransactionPayload } from "@together/types";
 import FormDialog from "@/components/custom/form-dialog/form-dialog";
 import * as z from "zod";
+import { DateTime } from "luxon";
 
 const validator = z.object({
   person: z.string({
@@ -28,6 +29,7 @@ const EditTransactionDialog = ({
   const { transactions, setTransactions } = useTransactions();
   const { categories } = useCategories();
   const { members } = useMembers();
+  console.log(transaction);
 
   const onSubmit = async (metadata: Record<string, string>) => {
     const payload = {
