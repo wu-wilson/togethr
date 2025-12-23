@@ -29,7 +29,6 @@ const EditTransactionDialog = ({
   const { transactions, setTransactions } = useTransactions();
   const { categories } = useCategories();
   const { members } = useMembers();
-  console.log(transaction);
 
   const onSubmit = async (metadata: Record<string, string>) => {
     const payload = {
