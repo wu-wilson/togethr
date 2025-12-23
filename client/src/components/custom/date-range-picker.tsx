@@ -8,7 +8,6 @@ import { DateTime } from "luxon";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { ChevronDownIcon, Calendar as CalendarIcon } from "lucide-react";
-import { formatDate } from "date-fns";
 import { useDateRange } from "@/hooks/useDateRange";
 import type { DateRange } from "react-day-picker";
 
@@ -45,11 +44,14 @@ const DateRangePicker = () => {
           <div className="flex items-center gap-3">
             <CalendarIcon />
             {dateRange?.from && dateRange.to
-              ? `${DateTime.fromISO(dateRange.from).toLocaleString(
-                  DateTime.DATE_SHORT
-                )} - ${DateTime.fromISO(dateRange.to).toLocaleString(
-                  DateTime.DATE_SHORT
-                )}`
+              ? `${DateTime.fromISO(dateRange.from, {
+                  zone: "utc",
+                }).toLocaleString(DateTime.DATE_SHORT)} - ${DateTime.fromISO(
+                  dateRange.to,
+                  {
+                    zone: "utc",
+                  }
+                ).toLocaleString(DateTime.DATE_SHORT)}`
               : "Select date range"}
           </div>
           <ChevronDownIcon />
@@ -67,7 +69,9 @@ const DateRangePicker = () => {
             zone: "utc",
           }).toJSDate()}
           onSelect={setSelectedDateRange}
-          disabled={{ after: new Date() }}
+          disabled={{
+            after: DateTime.utc().endOf("day").toJSDate(),
+          }}
         />
         <div className="flex justify-end p-3 gap-2 border-t">
           <Button size="sm" variant="secondary" onClick={handleCancel}>

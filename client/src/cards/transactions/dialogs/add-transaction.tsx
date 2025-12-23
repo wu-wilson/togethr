@@ -7,6 +7,7 @@ import { useMembers } from "@/hooks/useMembers";
 import type { AddTransactionPayload } from "@together/types";
 import FormDialog from "@/components/custom/form-dialog/form-dialog";
 import z from "zod";
+import { DateTime } from "luxon";
 
 const validator = z.object({
   person: z.string({
@@ -67,7 +68,7 @@ const AddTransactionDialog = () => {
         {
           type: "date",
           name: "date",
-          defaultValue: new Date().toISOString(),
+          defaultValue: DateTime.utc().toISODate(),
         },
       ]}
       validator={validator}

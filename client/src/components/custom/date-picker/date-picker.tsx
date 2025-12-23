@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { ChevronDownIcon } from "lucide-react";
-import { format } from "date-fns";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import {
@@ -18,15 +17,12 @@ export const DatePicker = ({ id, value, onSelect }: DatePickerProps) => {
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild id={id}>
         <Button
-          aria-invalid={true}
           variant="outline"
           id="date"
           className="w-full justify-between font-normal"
         >
           {value
-            ? DateTime.fromJSDate(value)
-                .toUTC()
-                .toLocaleString(DateTime.DATE_FULL)
+            ? DateTime.fromJSDate(value).toLocaleString(DateTime.DATE_FULL)
             : "Select date"}
           <ChevronDownIcon />
         </Button>
@@ -42,6 +38,7 @@ export const DatePicker = ({ id, value, onSelect }: DatePickerProps) => {
               setOpen(false);
             }
           }}
+          disabled={{ after: DateTime.utc().endOf("day").toJSDate() }}
         />
       </PopoverContent>
     </Popover>
