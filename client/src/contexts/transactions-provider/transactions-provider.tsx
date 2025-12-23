@@ -1,6 +1,8 @@
 import { createContext, useEffect, useState } from "react";
 import { fetchTransactions } from "@/services/transactions.service";
 import { useDateRange } from "@/hooks/useDateRange";
+import { useMembers } from "@/hooks/useMembers";
+import { useCategories } from "@/hooks/useCategories";
 import type {
   TransactionsProviderProps,
   TransactionsProviderState,
@@ -14,6 +16,8 @@ export const TransactionsProvider = ({
   children,
 }: TransactionsProviderProps) => {
   const { dateRange } = useDateRange();
+  const { members } = useMembers();
+  const { categories } = useCategories();
 
   const [transactions, setTransactions] = useState<Transaction[] | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -42,6 +46,19 @@ export const TransactionsProvider = ({
   useEffect(() => {
     setLoading(true);
   }, [dateRange]);
+
+  useEffect(() => {
+    if (!transactions || !members || !categories) {
+      return;
+    }
+    const memberIds = new Set(members.map((m) => m.id));
+    const categoryIds = new Set(categories.map((c) => c.id));
+    setTransactions(
+      transactions.filter(
+        (t) => memberIds.has(t.member_id) && categoryIds.has(t.category_id)
+      )
+    );
+  }, [members, categories]);
 
   return (
     <TransactionsProviderContext.Provider

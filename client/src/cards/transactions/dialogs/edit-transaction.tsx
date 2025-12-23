@@ -62,16 +62,17 @@ const EditTransactionDialog = ({
           type: "dropdown",
           name: "person",
           options: members!.map((m) => m.name),
-          defaultValue: members!.find((m) => m.id === transaction.member_id)!
-            .name,
+          defaultValue:
+            members!.find((m) => m.id === transaction.member_id)?.name ??
+            undefined,
         },
         {
           type: "dropdown",
           name: "category",
           options: categories!.map((c) => c.name),
-          defaultValue: categories!.find(
-            (c) => c.id === transaction.category_id
-          )!.name,
+          defaultValue:
+            categories!.find((c) => c.id === transaction.category_id)?.name ??
+            undefined,
         },
         {
           type: "currency",

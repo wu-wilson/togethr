@@ -44,12 +44,9 @@ const Transactions = () => {
     {
       accessorKey: "member_id",
       header: "Person",
-      cell: ({ row }) => {
-        const member = members!.find(
-          (m) => m.id === row.getValue("category_id")
-        );
-        return member ? member.name : "Unassigned";
-      },
+      cell: ({ row }) =>
+        members!.find((m) => m.id === row.getValue("member_id"))?.name ||
+        "Unassigned",
     },
     {
       accessorKey: "transaction_date",
