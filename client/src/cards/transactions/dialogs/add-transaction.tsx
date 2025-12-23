@@ -10,12 +10,8 @@ import z from "zod";
 import { DateTime } from "luxon";
 
 const validator = z.object({
-  person: z.string({
-    message: "Person is required.",
-  }),
-  category: z.string({
-    message: "Category is required.",
-  }),
+  person: z.string().trim().min(1, "Person is required."),
+  category: z.string().trim().min(1, "Category is required."),
   amount: z.string().trim().min(1, "Amount is required."),
 });
 
