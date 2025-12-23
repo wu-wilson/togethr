@@ -4,10 +4,11 @@ import { CirclePlus } from "lucide-react";
 import { useTransactions } from "@/hooks/useTransactions";
 import { useCategories } from "@/hooks/useCategories";
 import { useMembers } from "@/hooks/useMembers";
+import { useDateRange } from "@/hooks/useDateRange";
+import { DateTime } from "luxon";
 import type { AddTransactionPayload } from "@together/types";
 import FormDialog from "@/components/custom/form-dialog/form-dialog";
 import z from "zod";
-import { DateTime } from "luxon";
 
 const validator = z.object({
   person: z.string().trim().min(1, "Person is required."),
@@ -16,6 +17,7 @@ const validator = z.object({
 });
 
 const AddTransactionDialog = () => {
+  const { dateRange } = useDateRange();
   const { transactions, setTransactions } = useTransactions();
   const { categories } = useCategories();
   const { members } = useMembers();
@@ -28,7 +30,9 @@ const AddTransactionDialog = () => {
       transaction_date: metadata.date,
     };
     const { added } = await addTransaction(payload as AddTransactionPayload);
-    setTransactions([...transactions!, added]);
+    if (dateRange!.from! <= metadata.date && metadata.date <= dateRange!.to!) {
+      setTransactions([...transactions!, added]);
+    }
   };
 
   return (
