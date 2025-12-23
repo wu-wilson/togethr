@@ -3,11 +3,12 @@ import { Button } from "@/components/ui/button";
 import { useTransactions } from "@/hooks/useTransactions";
 import { useCategories } from "@/hooks/useCategories";
 import { useMembers } from "@/hooks/useMembers";
+import { useDateRange } from "@/hooks/useDateRange";
+import { DateTime } from "luxon";
 import { updateTransaction } from "@/services/transactions.service";
 import type { Transaction, UpdateTransactionPayload } from "@together/types";
 import FormDialog from "@/components/custom/form-dialog/form-dialog";
 import * as z from "zod";
-import { DateTime } from "luxon";
 
 const validator = z.object({
   person: z.string().trim().min(1, "Person is required."),
@@ -20,6 +21,7 @@ const EditTransactionDialog = ({
 }: {
   transaction: Transaction;
 }) => {
+  const { dateRange } = useDateRange();
   const { transactions, setTransactions } = useTransactions();
   const { categories } = useCategories();
   const { members } = useMembers();
@@ -37,9 +39,13 @@ const EditTransactionDialog = ({
       payload as UpdateTransactionPayload
     );
 
-    setTransactions(
-      transactions!.map((t) => (t.id === updated.id ? updated : t))
-    );
+    if (dateRange!.from! > metadata.date || metadata.date > dateRange!.to!) {
+      setTransactions(transactions!.filter((t) => t.id !== updated.id));
+    } else {
+      setTransactions(
+        transactions!.map((t) => (t.id === updated.id ? updated : t))
+      );
+    }
   };
 
   return (
