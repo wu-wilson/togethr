@@ -54,9 +54,20 @@ export const DateRangeProvider = ({ children }: DateRangeProviderProps) => {
     }
   }, []);
 
+  const isDateInRange = (date: string): boolean => {
+    if (!dateRange.from || !dateRange.to) {
+      false;
+    }
+    return dateRange.from! <= date && date <= dateRange.to!;
+  };
+
   return (
     <DateRangeProviderContext.Provider
-      value={{ dateRange: dateRange, setDateRange: setDateRangeWrapper }}
+      value={{
+        dateRange: dateRange,
+        setDateRange: setDateRangeWrapper,
+        isDateInRange,
+      }}
     >
       {children}
     </DateRangeProviderContext.Provider>

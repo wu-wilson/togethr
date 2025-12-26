@@ -1,11 +1,4 @@
-import {
-  flexRender,
-  getCoreRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
-  useReactTable,
-  type SortingState,
-} from "@tanstack/react-table";
+import { useState } from "react";
 import {
   Table,
   TableBody,
@@ -14,7 +7,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { useState } from "react";
+import {
+  flexRender,
+  getCoreRowModel,
+  getSortedRowModel,
+  useReactTable,
+  type SortingState,
+} from "@tanstack/react-table";
 import type { DataTableProps } from "./types";
 
 const DataTable = <TData, TValue>({

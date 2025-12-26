@@ -34,7 +34,6 @@ const DeleteCategoryDialog = ({ category }: { category: Category }) => {
           type: "text",
           name: "confirm",
           placeholder: "DELETE",
-          defaultValue: "",
         },
       ]}
       validator={validator}

@@ -23,10 +23,6 @@ const DateRangePicker = () => {
 
   const [open, setOpen] = useState(false);
 
-  const handleCancel = () => {
-    setOpen(false);
-  };
-
   const handleApply = () => {
     if (selectedDateRange?.from && selectedDateRange.to) {
       setDateRange({
@@ -74,7 +70,7 @@ const DateRangePicker = () => {
           }}
         />
         <div className="flex justify-end p-3 gap-2 border-t">
-          <Button size="sm" variant="secondary" onClick={handleCancel}>
+          <Button size="sm" variant="secondary" onClick={() => setOpen(false)}>
             Cancel
           </Button>
           <Button

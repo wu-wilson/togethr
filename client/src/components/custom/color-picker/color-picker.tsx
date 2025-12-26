@@ -8,7 +8,7 @@ import { useState } from "react";
 import { HexColorPicker } from "react-colorful";
 import type { ColorPickerProps } from "./types";
 
-const ColorPicker = ({ id, value, onChange }: ColorPickerProps) => {
+const ColorPicker = ({ value, onChange, id }: ColorPickerProps) => {
   const [open, setOpen] = useState(false);
 
   return (

@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { ChevronDownIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import {
@@ -7,10 +6,11 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import type { DatePickerProps } from "./types";
+import { ChevronDownIcon } from "lucide-react";
 import { DateTime } from "luxon";
+import type { DatePickerProps } from "./types";
 
-export const DatePicker = ({ id, value, onSelect }: DatePickerProps) => {
+export const DatePicker = ({ value, onSelect, id }: DatePickerProps) => {
   const [open, setOpen] = useState(false);
 
   return (

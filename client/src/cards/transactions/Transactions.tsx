@@ -1,4 +1,3 @@
-import DataTable from "@/components/custom/data-table/data-table";
 import {
   Card,
   CardContent,
@@ -12,6 +11,7 @@ import { useMembers } from "@/hooks/useMembers";
 import { DateTime } from "luxon";
 import type { ColumnDef } from "@tanstack/react-table";
 import type { Transaction } from "@together/types";
+import DataTable from "@/components/custom/data-table/data-table";
 import AddTransactionDialog from "./dialogs/add-transaction";
 import DeleteTransactionDialog from "./dialogs/delete-transaction";
 import EditTransactionDialog from "./dialogs/edit-transaction";

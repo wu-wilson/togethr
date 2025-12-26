@@ -17,7 +17,7 @@ const validator = z.object({
 });
 
 const AddTransactionDialog = () => {
-  const { dateRange } = useDateRange();
+  const { isDateInRange } = useDateRange();
   const { transactions, setTransactions } = useTransactions();
   const { categories } = useCategories();
   const { members } = useMembers();
@@ -30,7 +30,7 @@ const AddTransactionDialog = () => {
       transaction_date: metadata.date,
     };
     const { added } = await addTransaction(payload as AddTransactionPayload);
-    if (dateRange!.from! <= metadata.date && metadata.date <= dateRange!.to!) {
+    if (isDateInRange(added.transaction_date)) {
       setTransactions([...transactions!, added]);
     }
   };

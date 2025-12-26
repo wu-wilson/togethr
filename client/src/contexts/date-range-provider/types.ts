@@ -12,4 +12,5 @@ export type DateRange = {
 export type DateRangeProviderState = {
   dateRange: DateRange;
   setDateRange: (range: DateRange) => void;
+  isDateInRange: (date: string) => boolean;
 };

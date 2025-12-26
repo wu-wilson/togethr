@@ -10,11 +10,11 @@ import {
 import type { DropdownProps } from "./types";
 
 const Dropdown = ({
-  id,
-  label,
   options,
   value,
   onValueChange,
+  id,
+  label,
   placeholder = "Select",
   invalid = false,
 }: DropdownProps) => {

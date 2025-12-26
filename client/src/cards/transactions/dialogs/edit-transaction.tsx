@@ -21,7 +21,7 @@ const EditTransactionDialog = ({
 }: {
   transaction: Transaction;
 }) => {
-  const { dateRange } = useDateRange();
+  const { isDateInRange } = useDateRange();
   const { transactions, setTransactions } = useTransactions();
   const { categories } = useCategories();
   const { members } = useMembers();
@@ -39,12 +39,12 @@ const EditTransactionDialog = ({
       payload as UpdateTransactionPayload
     );
 
-    if (dateRange!.from! > metadata.date || metadata.date > dateRange!.to!) {
-      setTransactions(transactions!.filter((t) => t.id !== updated.id));
-    } else {
+    if (isDateInRange(updated.transaction_date)) {
       setTransactions(
         transactions!.map((t) => (t.id === updated.id ? updated : t))
       );
+    } else {
+      setTransactions(transactions!.filter((t) => t.id !== updated.id));
     }
   };
 

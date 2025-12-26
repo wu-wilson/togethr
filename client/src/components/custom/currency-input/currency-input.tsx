@@ -3,9 +3,9 @@ import { DollarSign } from "lucide-react";
 import type { CurrencyInputProps } from "./types";
 
 const CurrencyInput = ({
-  id,
   value,
   onChange,
+  id,
   placeholder = "0.00",
   invalid = false,
 }: CurrencyInputProps) => {
