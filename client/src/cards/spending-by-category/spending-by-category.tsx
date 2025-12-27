@@ -39,7 +39,7 @@ const SpendingByCategory = () => {
       <CardHeader>
         <CardTitle>Spending By Category</CardTitle>
         <CardDescription>
-          Visualize spending over time by category.
+          Visualize total spending per person by category.
         </CardDescription>
       </CardHeader>
       <CardContent>
