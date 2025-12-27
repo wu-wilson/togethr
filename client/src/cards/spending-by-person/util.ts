@@ -15,9 +15,9 @@ export const getChartData = (
     }
 
     const spending = dateMap.get(date)!;
-    const amount = Number(spending.get(t.member_id)) || 0;
+    const amount = spending.get(t.member_id) || 0;
 
-    spending.set(t.member_id, amount + Number(t.amount));
+    spending.set(t.member_id, amount + t.amount);
   });
 
   const sortedDates = Array.from(dateMap.keys()).sort(

@@ -52,9 +52,9 @@ const Transactions = () => {
       accessorKey: "transaction_date",
       header: "Date",
       cell: ({ row }) =>
-        DateTime.fromISO(row.getValue("transaction_date"), {
-          zone: "utc",
-        }).toLocaleString(DateTime.DATE_FULL),
+        DateTime.fromISO(row.getValue("transaction_date")).toLocaleString(
+          DateTime.DATE_FULL
+        ),
     },
     {
       accessorKey: "actions",

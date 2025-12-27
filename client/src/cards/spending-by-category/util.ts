@@ -6,9 +6,6 @@ export const getChartData = (
   members: Member[],
   categories: Category[]
 ) => {
-  const memberMap = new Map(members.map((m) => [m.id, m]));
-  const categoryMap = new Map(categories.map((c) => [c.id, c]));
-
   const categoryMemberSpending = new Map<number, Map<number, number>>();
 
   transactions.forEach((t) => {
@@ -17,9 +14,9 @@ export const getChartData = (
     }
 
     const spending = categoryMemberSpending.get(t.category_id)!;
-    const amount = Number(spending.get(t.member_id)) || 0;
+    const amount = spending.get(t.member_id) || 0;
 
-    spending.set(t.member_id, amount + Number(t.amount));
+    spending.set(t.member_id, amount + t.amount);
   });
 
   const data = categories.map((c) => {

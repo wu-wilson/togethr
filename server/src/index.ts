@@ -2,6 +2,7 @@ import { Pool } from "pg";
 import membersRouter from "./routers/members.router.js";
 import categoriesRouter from "./routers/categories.router.js";
 import transactionsRouter from "./routers/transactions.router.js";
+import pg from "pg";
 import express from "express";
 import cors from "cors";
 
@@ -31,6 +32,9 @@ const testDbConnection = async () => {
 };
 
 testDbConnection();
+
+pg.types.setTypeParser(1082, (value) => value);
+pg.types.setTypeParser(1700, (value) => parseFloat(value));
 
 app.use("/members", membersRouter);
 app.use("/categories", categoriesRouter);

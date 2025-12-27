@@ -32,8 +32,6 @@ const SpendingByCategory = () => {
     return getChartConfig(members!);
   }, [members]);
 
-  console.log(chartData);
-
   return (
     <Card className="w-full overflow-x-auto">
       <CardHeader>

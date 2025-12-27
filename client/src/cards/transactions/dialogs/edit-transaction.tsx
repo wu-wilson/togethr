@@ -82,9 +82,7 @@ const EditTransactionDialog = ({
         {
           type: "date",
           name: "date",
-          defaultValue: DateTime.fromISO(transaction.transaction_date, {
-            zone: "utc",
-          }).toISODate()!,
+          defaultValue: transaction.transaction_date,
         },
       ]}
       validator={validator}
