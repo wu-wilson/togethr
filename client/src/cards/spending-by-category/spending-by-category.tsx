@@ -52,10 +52,8 @@ const SpendingByCategory = () => {
             <YAxis />
             <XAxis dataKey="category" tickMargin={8} minTickGap={30} />
             <ChartTooltip
-              cursor={false}
               content={
                 <ChartTooltipContent
-                  indicator="dot"
                   formatter={(value, name, item) => (
                     <>
                       <div

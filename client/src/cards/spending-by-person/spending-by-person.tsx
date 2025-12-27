@@ -58,7 +58,6 @@ const SpendingByPerson = () => {
               }}
             />
             <ChartTooltip
-              cursor={false}
               content={
                 <ChartTooltipContent
                   labelFormatter={(value) => {
