@@ -68,7 +68,7 @@ const AddTransactionDialog = () => {
         {
           type: "date",
           name: "date",
-          defaultValue: DateTime.utc().toISODate(),
+          defaultValue: DateTime.local().toISODate(),
         },
       ]}
       validator={validator}

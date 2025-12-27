@@ -33,6 +33,7 @@ export const getTransactions = async (
       `,
       [from, to]
     );
+
     res.json(transactions);
   } catch (error) {
     console.error("Error fetching transactions:", error);

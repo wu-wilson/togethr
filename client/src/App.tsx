@@ -9,6 +9,8 @@ import NavigationBar from "./components/custom/navigation-bar";
 import Members from "./cards/members/Members";
 import Categories from "./cards/categories/Categories";
 import Transactions from "./cards/transactions/Transactions";
+import SpendingByPerson from "./cards/spending-by-person/spending-by-person";
+import SpendingByCategory from "./cards/spending-by-category/spending-by-category";
 
 const App = () => {
   const { theme } = useTheme();
@@ -34,6 +36,8 @@ const App = () => {
           </div>
           <div className="w-full max-w-7xl space-y-4 mt-4">
             <Transactions />
+            <SpendingByPerson />
+            <SpendingByCategory />
           </div>
         </div>
       )}
