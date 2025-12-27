@@ -76,10 +76,8 @@ const SpendingByPerson = () => {
                           } as React.CSSProperties
                         }
                       />
-                      <div className="rounded-[2px] bg-(--color-bg)">
-                        {name}
-                      </div>
-                      <div className="text-foreground ml-auto flex items-baseline gap-0.5 font-mono font-medium tabular-nums">
+                      {name}
+                      <div className="ml-auto">
                         {`$${Number(value).toFixed(2)}`}
                       </div>
                     </>
