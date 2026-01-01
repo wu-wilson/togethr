@@ -12,6 +12,7 @@ import Transactions from "./cards/transactions/Transactions";
 import SpendingOverTimeByPerson from "./cards/spending-over-time-by-person/spending-over-time-by-person";
 import CategoryBreakdownByPerson from "./cards/category-breakdown-by-person/category-breakdown-by-person";
 import SpendingDistributionByCategory from "./cards/spending-distribution-by-category/spending-distribution-by-category";
+import SpendingOverTimeByCategory from "./cards/spending-over-time-by-category/spending-over-time-by-category";
 
 const App = () => {
   const { theme } = useTheme();
@@ -38,6 +39,7 @@ const App = () => {
           <div className="w-full max-w-7xl space-y-4 mt-4 mb-4">
             <Transactions />
             <SpendingOverTimeByPerson />
+            <SpendingOverTimeByCategory />
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 w-full max-w-7xl mb-4 items-stretch">
             <div className="lg:col-span-1">

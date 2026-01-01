@@ -7,20 +7,19 @@ export const getChartData = (
 ) => {
   const categoryTotals: Record<number, number> = {};
 
+  categories.forEach((c) => {
+    categoryTotals[c.id] = 0;
+  });
+
   transactions.forEach((t) => {
-    if (!categoryTotals[t.category_id]) {
-      categoryTotals[t.category_id] = 0;
-    }
     categoryTotals[t.category_id] += t.amount;
   });
 
-  const data = categories
-    .filter((c) => categoryTotals[c.id])
-    .map((c) => ({
-      category: c.name,
-      amount: categoryTotals[c.id],
-      fill: c.color,
-    }));
+  const data = categories.map((c) => ({
+    category: c.name,
+    amount: categoryTotals[c.id],
+    fill: c.color,
+  }));
 
   return data;
 };

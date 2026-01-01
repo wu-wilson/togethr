@@ -44,7 +44,7 @@ const SpendingDistributionByCategory = () => {
           className="[&_.recharts-pie-label-text]:fill-foreground aspect-auto h-80"
         >
           <PieChart>
-            <Pie data={chartData} dataKey="amount" nameKey="category" label />
+            <Pie data={chartData} dataKey="amount" nameKey="category" />
             <ChartTooltip
               content={
                 <ChartTooltipContent
