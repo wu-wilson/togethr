@@ -19,7 +19,7 @@ import { getChartConfig, getChartData } from "./util";
 import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts";
 import { DateTime } from "luxon";
 
-const SpendingByPerson = () => {
+const SpendingOverTimeByPerson = () => {
   const { members } = useMembers();
   const { transactions } = useTransactions();
 
@@ -32,11 +32,11 @@ const SpendingByPerson = () => {
   }, [members]);
 
   return (
-    <Card className="w-full overflow-x-auto">
+    <Card className="w-full">
       <CardHeader>
-        <CardTitle>Spending By Person</CardTitle>
+        <CardTitle>Spending Over Time by Person</CardTitle>
         <CardDescription>
-          Visualize spending over time by person.
+          Visualize how each person's spending changes over time.
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -93,7 +93,10 @@ const SpendingByPerson = () => {
                 fill={`${m.color}33`}
               />
             ))}
-            <ChartLegend content={<ChartLegendContent />} />
+            <ChartLegend
+              content={<ChartLegendContent />}
+              className="flex-wrap"
+            />
           </AreaChart>
         </ChartContainer>
       </CardContent>
@@ -101,4 +104,4 @@ const SpendingByPerson = () => {
   );
 };
 
-export default SpendingByPerson;
+export default SpendingOverTimeByPerson;

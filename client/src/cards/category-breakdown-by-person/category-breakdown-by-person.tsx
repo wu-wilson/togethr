@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/chart";
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
 
-const SpendingByCategory = () => {
+const CategoryBreakdownByPerson = () => {
   const { members } = useMembers();
   const { transactions } = useTransactions();
   const { categories } = useCategories();
@@ -33,11 +33,11 @@ const SpendingByCategory = () => {
   }, [members]);
 
   return (
-    <Card className="w-full overflow-x-auto">
+    <Card className="w-full h-full">
       <CardHeader>
-        <CardTitle>Spending By Category</CardTitle>
+        <CardTitle>Category Breakdown by Person</CardTitle>
         <CardDescription>
-          Visualize total spending per person by category.
+          Visualize how each person distributes spending across categories.
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -80,7 +80,10 @@ const SpendingByCategory = () => {
                 radius={index === members.length - 1 ? [4, 4, 0, 0] : 0}
               />
             ))}
-            <ChartLegend content={<ChartLegendContent />} />
+            <ChartLegend
+              content={<ChartLegendContent />}
+              className="flex-wrap"
+            />
           </BarChart>
         </ChartContainer>
       </CardContent>
@@ -88,4 +91,4 @@ const SpendingByCategory = () => {
   );
 };
 
-export default SpendingByCategory;
+export default CategoryBreakdownByPerson;
