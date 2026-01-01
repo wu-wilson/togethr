@@ -64,7 +64,10 @@ const CategoryBreakdownByPerson = () => {
                       />
                       {name}
                       <span className="ml-auto">
-                        {`$${Number(value).toFixed(2)}`}
+                        {new Intl.NumberFormat("en-US", {
+                          style: "currency",
+                          currency: "USD",
+                        }).format(Number(value))}
                       </span>
                     </>
                   )}

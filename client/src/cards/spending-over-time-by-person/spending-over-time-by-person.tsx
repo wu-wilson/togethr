@@ -78,7 +78,10 @@ const SpendingOverTimeByPerson = () => {
                       />
                       {name}
                       <div className="ml-auto">
-                        {`$${Number(value).toFixed(2)}`}
+                        {new Intl.NumberFormat("en-US", {
+                          style: "currency",
+                          currency: "USD",
+                        }).format(Number(value))}
                       </div>
                     </>
                   )}
