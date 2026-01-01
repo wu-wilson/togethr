@@ -13,7 +13,7 @@ export const DateRangeProviderContext =
 export const DateRangeProvider = ({ children }: DateRangeProviderProps) => {
   const { getParam, setParam } = useQueryParams();
 
-  const today = DateTime.utc().startOf("day");
+  const today = DateTime.now().startOf("day");
 
   const defaultStart = today.minus({ months: 1 }).toISODate();
   const defaultEnd = today.toISODate();

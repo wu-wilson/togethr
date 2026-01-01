@@ -40,14 +40,11 @@ const DateRangePicker = () => {
           <div className="flex items-center gap-3">
             <CalendarIcon />
             {dateRange?.from && dateRange.to
-              ? `${DateTime.fromISO(dateRange.from, {
-                  zone: "utc",
-                }).toLocaleString(DateTime.DATE_SHORT)} - ${DateTime.fromISO(
-                  dateRange.to,
-                  {
-                    zone: "utc",
-                  }
-                ).toLocaleString(DateTime.DATE_SHORT)}`
+              ? `${DateTime.fromISO(dateRange.from).toLocaleString(
+                  DateTime.DATE_SHORT
+                )} - ${DateTime.fromISO(dateRange.to).toLocaleString(
+                  DateTime.DATE_SHORT
+                )}`
               : "Select date range"}
           </div>
           <ChevronDownIcon />
@@ -61,12 +58,10 @@ const DateRangePicker = () => {
           mode="range"
           numberOfMonths={2}
           selected={selectedDateRange}
-          defaultMonth={DateTime.fromISO(dateRange.from!, {
-            zone: "utc",
-          }).toJSDate()}
+          defaultMonth={DateTime.fromISO(dateRange.from!).toJSDate()}
           onSelect={setSelectedDateRange}
           disabled={{
-            after: DateTime.utc().endOf("day").toJSDate(),
+            after: DateTime.now().endOf("day").toJSDate(),
           }}
         />
         <div className="flex justify-end p-3 gap-2 border-t">

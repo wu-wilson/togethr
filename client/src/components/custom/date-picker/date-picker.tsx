@@ -38,7 +38,7 @@ export const DatePicker = ({ value, onSelect, id }: DatePickerProps) => {
               setOpen(false);
             }
           }}
-          disabled={{ after: DateTime.utc().endOf("day").toJSDate() }}
+          disabled={{ after: DateTime.now().endOf("day").toJSDate() }}
         />
       </PopoverContent>
     </Popover>

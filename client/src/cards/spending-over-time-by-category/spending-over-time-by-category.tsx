@@ -52,18 +52,18 @@ const SpendingOverTimeByCategory = () => {
               tickMargin={8}
               minTickGap={30}
               tickFormatter={(value) => {
-                return DateTime.fromISO(value, {
-                  zone: "utc",
-                }).toLocaleString(DateTime.DATE_MED);
+                return DateTime.fromISO(value).toLocaleString(
+                  DateTime.DATE_MED
+                );
               }}
             />
             <ChartTooltip
               content={
                 <ChartTooltipContent
                   labelFormatter={(value) => {
-                    return DateTime.fromISO(value, {
-                      zone: "utc",
-                    }).toLocaleString(DateTime.DATE_FULL);
+                    return DateTime.fromISO(value).toLocaleString(
+                      DateTime.DATE_FULL
+                    );
                   }}
                   indicator="dot"
                   formatter={(value, name, item) => (
