@@ -6,13 +6,13 @@ import { useTransactions } from "./hooks/useTransactions";
 import Error from "./components/custom/error/error";
 import Loading from "@/components/custom/loading/loading";
 import NavigationBar from "./components/custom/navigation-bar";
-import Members from "./cards/members/Members";
-import Categories from "./cards/categories/Categories";
-import Transactions from "./cards/transactions/Transactions";
-import SpendingOverTimeByPerson from "./cards/spending-over-time-by-person/spending-over-time-by-person";
-import CategoryBreakdownByPerson from "./cards/category-breakdown-by-person/category-breakdown-by-person";
-import SpendingDistributionByCategory from "./cards/spending-distribution-by-category/spending-distribution-by-category";
-import SpendingOverTimeByCategory from "./cards/spending-over-time-by-category/spending-over-time-by-category";
+import Members from "./cards/manage/members/Members";
+import Categories from "./cards/manage/categories/Categories";
+import Transactions from "./cards/manage/transactions/Transactions";
+import SpendingOverTimeByPerson from "./cards/charts/spending-over-time-by-person/spending-over-time-by-person";
+import CategoryBreakdownByPerson from "./cards/charts/category-breakdown-by-person/category-breakdown-by-person";
+import SpendingDistributionByCategory from "./cards/charts/spending-distribution-by-category/spending-distribution-by-category";
+import SpendingOverTimeByCategory from "./cards/charts/spending-over-time-by-category/spending-over-time-by-category";
 
 const App = () => {
   const { theme } = useTheme();
