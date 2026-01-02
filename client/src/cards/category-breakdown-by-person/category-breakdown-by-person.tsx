@@ -2,13 +2,6 @@ import { useMemo } from "react";
 import { useTransactions } from "@/hooks/useTransactions";
 import { useMembers } from "@/hooks/useMembers";
 import { useCategories } from "@/hooks/useCategories";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { getChartConfig, getChartData } from "./util";
 import {
   ChartContainer,
@@ -18,6 +11,7 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
+import ChartCard from "@/components/custom/chart-card/chart-card";
 
 const CategoryBreakdownByPerson = () => {
   const { members } = useMembers();
@@ -33,70 +27,53 @@ const CategoryBreakdownByPerson = () => {
   }, [members]);
 
   return (
-    <Card className="w-full h-full">
-      <CardHeader>
-        <CardTitle>Category Breakdown by Person</CardTitle>
-        <CardDescription>
-          Visualize how each person distributes spending across categories.
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        {transactions!.length > 0 ? (
-          <ChartContainer
-            config={chartConfig}
-            className="aspect-auto h-80 w-full"
-          >
-            <BarChart accessibilityLayer data={chartData}>
-              <CartesianGrid />
-              <YAxis />
-              <XAxis dataKey="category" tickMargin={8} minTickGap={30} />
-              <ChartTooltip
-                content={
-                  <ChartTooltipContent
-                    formatter={(value, name, item) => (
-                      <>
-                        <div
-                          className="h-2.5 w-2.5 shrink-0 rounded-[2px] bg-(--color-bg)"
-                          style={
-                            {
-                              "--color-bg": item.color,
-                            } as React.CSSProperties
-                          }
-                        />
-                        {name}
-                        <span className="ml-auto">
-                          {new Intl.NumberFormat("en-US", {
-                            style: "currency",
-                            currency: "USD",
-                          }).format(Number(value))}
-                        </span>
-                      </>
-                    )}
-                  />
-                }
+    <ChartCard
+      title="Category Breakdown by Person"
+      description="Visualize how each person distributes spending across categories."
+    >
+      <ChartContainer config={chartConfig} className="aspect-auto h-80 w-full">
+        <BarChart accessibilityLayer data={chartData}>
+          <CartesianGrid />
+          <YAxis />
+          <XAxis dataKey="category" tickMargin={8} minTickGap={30} />
+          <ChartTooltip
+            content={
+              <ChartTooltipContent
+                formatter={(value, name, item) => (
+                  <>
+                    <div
+                      className="h-2.5 w-2.5 shrink-0 rounded-[2px] bg-(--color-bg)"
+                      style={
+                        {
+                          "--color-bg": item.color,
+                        } as React.CSSProperties
+                      }
+                    />
+                    {name}
+                    <span className="ml-auto">
+                      {new Intl.NumberFormat("en-US", {
+                        style: "currency",
+                        currency: "USD",
+                      }).format(Number(value))}
+                    </span>
+                  </>
+                )}
               />
-              {members?.map((m, index) => (
-                <Bar
-                  key={m.id}
-                  dataKey={m.name}
-                  fill={m.color}
-                  stackId="a"
-                  radius={index === members.length - 1 ? [4, 4, 0, 0] : 0}
-                />
-              ))}
-              <ChartLegend
-                content={<ChartLegendContent />}
-                className="flex-wrap"
-              />
-            </BarChart>
-          </ChartContainer>
-        ) : (
-          <div className="h-80 flex justify-center items-center text-sm">
-            No results
-          </div>
-        )}
-      </CardContent>
-    </Card>
+            }
+          />
+          {members?.map((m, index) => (
+            <Bar
+              key={m.id}
+              dataKey={m.name}
+              fill={m.color}
+              stackId="a"
+              radius={index === members.length - 1 ? [4, 4, 0, 0] : 0}
+            />
+          ))}
+          <ChartLegend content={<ChartLegendContent />} className="flex-wrap" />
+        </BarChart>
+      </ChartContainer>
+    </ChartCard>
   );
 };
 

@@ -2,13 +2,6 @@ import { useMemo } from "react";
 import { useTransactions } from "@/hooks/useTransactions";
 import { useMembers } from "@/hooks/useMembers";
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import {
   ChartContainer,
   ChartLegend,
   ChartLegendContent,
@@ -18,6 +11,7 @@ import {
 import { getChartConfig, getChartData } from "./util";
 import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts";
 import { DateTime } from "luxon";
+import ChartCard from "@/components/custom/chart-card/chart-card";
 
 const SpendingOverTimeByPerson = () => {
   const { members } = useMembers();
@@ -32,84 +26,66 @@ const SpendingOverTimeByPerson = () => {
   }, [members]);
 
   return (
-    <Card className="w-full">
-      <CardHeader>
-        <CardTitle>Spending Over Time by Person</CardTitle>
-        <CardDescription>
-          Visualize how each person's spending changes over time.
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        {transactions!.length > 0 ? (
-          <ChartContainer
-            config={chartConfig}
-            className="aspect-auto h-80 w-full"
-          >
-            <AreaChart data={chartData}>
-              <CartesianGrid />
-              <YAxis />
-              <XAxis
-                dataKey="date"
-                tickMargin={8}
-                minTickGap={30}
-                tickFormatter={(value) => {
+    <ChartCard
+      title="Spending Over Time by Person"
+      description="Visualize how each person's spending changes over time."
+    >
+      <ChartContainer config={chartConfig} className="aspect-auto h-80 w-full">
+        <AreaChart data={chartData}>
+          <CartesianGrid />
+          <YAxis />
+          <XAxis
+            dataKey="date"
+            tickMargin={8}
+            minTickGap={30}
+            tickFormatter={(value) => {
+              return DateTime.fromISO(value).toLocaleString(DateTime.DATE_MED);
+            }}
+          />
+          <ChartTooltip
+            content={
+              <ChartTooltipContent
+                labelFormatter={(value) => {
                   return DateTime.fromISO(value).toLocaleString(
-                    DateTime.DATE_MED
+                    DateTime.DATE_FULL
                   );
                 }}
+                indicator="dot"
+                formatter={(value, name, item) => (
+                  <>
+                    <div
+                      className="h-2.5 w-2.5 shrink-0 rounded-[2px] bg-(--color-bg)"
+                      style={
+                        {
+                          "--color-bg": item.color,
+                        } as React.CSSProperties
+                      }
+                    />
+                    {name}
+                    <div className="ml-auto">
+                      {new Intl.NumberFormat("en-US", {
+                        style: "currency",
+                        currency: "USD",
+                      }).format(Number(value))}
+                    </div>
+                  </>
+                )}
               />
-              <ChartTooltip
-                content={
-                  <ChartTooltipContent
-                    labelFormatter={(value) => {
-                      return DateTime.fromISO(value).toLocaleString(
-                        DateTime.DATE_FULL
-                      );
-                    }}
-                    indicator="dot"
-                    formatter={(value, name, item) => (
-                      <>
-                        <div
-                          className="h-2.5 w-2.5 shrink-0 rounded-[2px] bg-(--color-bg)"
-                          style={
-                            {
-                              "--color-bg": item.color,
-                            } as React.CSSProperties
-                          }
-                        />
-                        {name}
-                        <div className="ml-auto">
-                          {new Intl.NumberFormat("en-US", {
-                            style: "currency",
-                            currency: "USD",
-                          }).format(Number(value))}
-                        </div>
-                      </>
-                    )}
-                  />
-                }
-              />
-              {members?.map((m) => (
-                <Area
-                  dataKey={m.name}
-                  type="monotone"
-                  stroke={m.color}
-                  fill={`${m.color}33`}
-                />
-              ))}
-              <ChartLegend
-                content={<ChartLegendContent />}
-                className="flex-wrap"
-              />
-            </AreaChart>
-          </ChartContainer>
-        ) : (
-          <div className="h-80 flex justify-center items-center text-sm">
-            No results
-          </div>
-        )}
-      </CardContent>
-    </Card>
+            }
+          />
+          {members?.map((m) => (
+            <Area
+              key={m.id}
+              dataKey={m.name}
+              type="monotone"
+              stroke={m.color}
+              fill={`${m.color}33`}
+            />
+          ))}
+          <ChartLegend content={<ChartLegendContent />} className="flex-wrap" />
+        </AreaChart>
+      </ChartContainer>
+    </ChartCard>
   );
 };
 
