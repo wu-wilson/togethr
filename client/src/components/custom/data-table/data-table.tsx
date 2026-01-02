@@ -37,6 +37,7 @@ const DataTable = <TData, TValue>({
     getSortedRowModel: getSortedRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     onPaginationChange: setPagination,
+    autoResetPageIndex: false,
     state: {
       sorting,
       pagination,
