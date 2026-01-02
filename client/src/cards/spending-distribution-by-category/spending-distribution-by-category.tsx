@@ -39,43 +39,49 @@ const SpendingDistributionByCategory = () => {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <ChartContainer
-          config={chartConfig}
-          className="[&_.recharts-pie-label-text]:fill-foreground aspect-auto h-80"
-        >
-          <PieChart>
-            <Pie data={chartData} dataKey="amount" nameKey="category" />
-            <ChartTooltip
-              content={
-                <ChartTooltipContent
-                  formatter={(value, name, item) => (
-                    <>
-                      <div
-                        className="h-2.5 w-2.5 shrink-0 rounded-[2px] bg-(--color-bg)"
-                        style={
-                          {
-                            "--color-bg": item.payload.fill,
-                          } as React.CSSProperties
-                        }
-                      />
-                      {name}
-                      <span className="ml-auto">
-                        {new Intl.NumberFormat("en-US", {
-                          style: "currency",
-                          currency: "USD",
-                        }).format(Number(value))}
-                      </span>
-                    </>
-                  )}
-                />
-              }
-            />
-            <ChartLegend
-              content={<ChartLegendContent />}
-              className="flex-wrap"
-            />
-          </PieChart>
-        </ChartContainer>
+        {transactions!.length > 0 ? (
+          <ChartContainer
+            config={chartConfig}
+            className="[&_.recharts-pie-label-text]:fill-foreground aspect-auto h-80"
+          >
+            <PieChart>
+              <Pie data={chartData} dataKey="amount" nameKey="category" />
+              <ChartTooltip
+                content={
+                  <ChartTooltipContent
+                    formatter={(value, name, item) => (
+                      <>
+                        <div
+                          className="h-2.5 w-2.5 shrink-0 rounded-[2px] bg-(--color-bg)"
+                          style={
+                            {
+                              "--color-bg": item.payload.fill,
+                            } as React.CSSProperties
+                          }
+                        />
+                        {name}
+                        <span className="ml-auto">
+                          {new Intl.NumberFormat("en-US", {
+                            style: "currency",
+                            currency: "USD",
+                          }).format(Number(value))}
+                        </span>
+                      </>
+                    )}
+                  />
+                }
+              />
+              <ChartLegend
+                content={<ChartLegendContent />}
+                className="flex-wrap"
+              />
+            </PieChart>
+          </ChartContainer>
+        ) : (
+          <div className="h-80 flex justify-center items-center text-sm">
+            No results
+          </div>
+        )}
       </CardContent>
     </Card>
   );

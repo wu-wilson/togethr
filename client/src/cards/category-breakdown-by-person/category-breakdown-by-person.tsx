@@ -41,54 +41,60 @@ const CategoryBreakdownByPerson = () => {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <ChartContainer
-          config={chartConfig}
-          className="aspect-auto h-80 w-full"
-        >
-          <BarChart accessibilityLayer data={chartData}>
-            <CartesianGrid />
-            <YAxis />
-            <XAxis dataKey="category" tickMargin={8} minTickGap={30} />
-            <ChartTooltip
-              content={
-                <ChartTooltipContent
-                  formatter={(value, name, item) => (
-                    <>
-                      <div
-                        className="h-2.5 w-2.5 shrink-0 rounded-[2px] bg-(--color-bg)"
-                        style={
-                          {
-                            "--color-bg": item.color,
-                          } as React.CSSProperties
-                        }
-                      />
-                      {name}
-                      <span className="ml-auto">
-                        {new Intl.NumberFormat("en-US", {
-                          style: "currency",
-                          currency: "USD",
-                        }).format(Number(value))}
-                      </span>
-                    </>
-                  )}
-                />
-              }
-            />
-            {members?.map((m, index) => (
-              <Bar
-                key={m.id}
-                dataKey={m.name}
-                fill={m.color}
-                stackId="a"
-                radius={index === members.length - 1 ? [4, 4, 0, 0] : 0}
+        {transactions!.length > 0 ? (
+          <ChartContainer
+            config={chartConfig}
+            className="aspect-auto h-80 w-full"
+          >
+            <BarChart accessibilityLayer data={chartData}>
+              <CartesianGrid />
+              <YAxis />
+              <XAxis dataKey="category" tickMargin={8} minTickGap={30} />
+              <ChartTooltip
+                content={
+                  <ChartTooltipContent
+                    formatter={(value, name, item) => (
+                      <>
+                        <div
+                          className="h-2.5 w-2.5 shrink-0 rounded-[2px] bg-(--color-bg)"
+                          style={
+                            {
+                              "--color-bg": item.color,
+                            } as React.CSSProperties
+                          }
+                        />
+                        {name}
+                        <span className="ml-auto">
+                          {new Intl.NumberFormat("en-US", {
+                            style: "currency",
+                            currency: "USD",
+                          }).format(Number(value))}
+                        </span>
+                      </>
+                    )}
+                  />
+                }
               />
-            ))}
-            <ChartLegend
-              content={<ChartLegendContent />}
-              className="flex-wrap"
-            />
-          </BarChart>
-        </ChartContainer>
+              {members?.map((m, index) => (
+                <Bar
+                  key={m.id}
+                  dataKey={m.name}
+                  fill={m.color}
+                  stackId="a"
+                  radius={index === members.length - 1 ? [4, 4, 0, 0] : 0}
+                />
+              ))}
+              <ChartLegend
+                content={<ChartLegendContent />}
+                className="flex-wrap"
+              />
+            </BarChart>
+          </ChartContainer>
+        ) : (
+          <div className="h-80 flex justify-center items-center text-sm">
+            No results
+          </div>
+        )}
       </CardContent>
     </Card>
   );
