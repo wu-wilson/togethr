@@ -21,7 +21,7 @@ const ChartCard = ({ title, description, children }: ChartCardProps) => {
         {transactions && transactions.length > 0 ? (
           children
         ) : (
-          <div className="h-80 flex justify-center items-center text-sm">
+          <div className="h-100 flex justify-center items-center text-sm">
             No results
           </div>
         )}

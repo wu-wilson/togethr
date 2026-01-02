@@ -26,53 +26,65 @@ const CategoryBreakdownByPerson = () => {
     return getChartConfig(members!);
   }, [members]);
 
+  const labelWidth = Math.max(...categories!.map((c) => c.name.length));
+  const xAxisWidth = Math.max(labelWidth * categories!.length * 10);
+
   return (
     <ChartCard
       title="Category Breakdown by Person"
       description="Visualize how each person distributes spending across categories."
     >
-      <ChartContainer config={chartConfig} className="aspect-auto h-80 w-full">
-        <BarChart accessibilityLayer data={chartData}>
-          <CartesianGrid />
-          <YAxis />
-          <XAxis dataKey="category" tickMargin={8} minTickGap={30} />
-          <ChartTooltip
-            content={
-              <ChartTooltipContent
-                formatter={(value, name, item) => (
-                  <>
-                    <div
-                      className="h-2.5 w-2.5 shrink-0 rounded-[2px] bg-(--color-bg)"
-                      style={
-                        {
-                          "--color-bg": item.color,
-                        } as React.CSSProperties
-                      }
-                    />
-                    {name}
-                    <span className="ml-auto">
-                      {new Intl.NumberFormat("en-US", {
-                        style: "currency",
-                        currency: "USD",
-                      }).format(Number(value))}
-                    </span>
-                  </>
-                )}
-              />
-            }
-          />
-          {members?.map((m, index) => (
-            <Bar
-              key={m.id}
-              dataKey={m.name}
-              fill={m.color}
-              stackId="a"
-              radius={index === members.length - 1 ? [4, 4, 0, 0] : 0}
+      <div className="overflow-x-auto">
+        <ChartContainer
+          config={chartConfig}
+          className="aspect-auto h-100 pb-2"
+          style={{ minWidth: xAxisWidth }}
+        >
+          <BarChart accessibilityLayer data={chartData}>
+            <CartesianGrid />
+            <YAxis />
+            <XAxis dataKey="category" tickMargin={8} minTickGap={30} />
+            <ChartTooltip
+              content={
+                <ChartTooltipContent
+                  formatter={(value, name, item) => (
+                    <>
+                      <div
+                        className="h-2.5 w-2.5 shrink-0 rounded-[2px] bg-(--color-bg)"
+                        style={
+                          {
+                            "--color-bg": item.color,
+                          } as React.CSSProperties
+                        }
+                      />
+                      {name}
+                      <span className="ml-auto">
+                        {new Intl.NumberFormat("en-US", {
+                          style: "currency",
+                          currency: "USD",
+                        }).format(Number(value))}
+                      </span>
+                    </>
+                  )}
+                />
+              }
             />
-          ))}
-          <ChartLegend content={<ChartLegendContent />} className="flex-wrap" />
-        </BarChart>
-      </ChartContainer>
+            {members?.map((m, index) => (
+              <Bar
+                key={m.id}
+                dataKey={m.name}
+                fill={m.color}
+                stackId="a"
+                radius={index === members.length - 1 ? [4, 4, 0, 0] : 0}
+              />
+            ))}
+            <ChartLegend
+              content={<ChartLegendContent />}
+              className="flex-wrap"
+            />
+          </BarChart>
+        </ChartContainer>
+      </div>
     </ChartCard>
   );
 };

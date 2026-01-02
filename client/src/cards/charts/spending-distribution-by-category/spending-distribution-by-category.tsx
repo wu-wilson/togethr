@@ -31,7 +31,7 @@ const SpendingDistributionByCategory = () => {
     >
       <ChartContainer
         config={chartConfig}
-        className="[&_.recharts-pie-label-text]:fill-foreground aspect-auto h-80"
+        className="[&_.recharts-pie-label-text]:fill-foreground aspect-auto h-100"
       >
         <PieChart>
           <Pie data={chartData} dataKey="amount" nameKey="category" />

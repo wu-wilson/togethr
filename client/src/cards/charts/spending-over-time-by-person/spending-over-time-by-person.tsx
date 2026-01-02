@@ -30,7 +30,7 @@ const SpendingOverTimeByPerson = () => {
       title="Spending Over Time by Person"
       description="Visualize how each person's spending changes over time."
     >
-      <ChartContainer config={chartConfig} className="aspect-auto h-80 w-full">
+      <ChartContainer config={chartConfig} className="aspect-auto h-100 w-full">
         <AreaChart data={chartData}>
           <CartesianGrid />
           <YAxis />
