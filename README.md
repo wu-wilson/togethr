@@ -43,10 +43,6 @@ For Prod:
 ./launch.prod.sh
 ```
 
-#### 3.Open the site
+#### 3.Open the app
 
-Once the containers are up and running, open your browser and navigate to:
-
-[http://localhost:3000](http://localhost:3000)
-
-You should see Togethr running locally.
+Once the containers are running, navigate to [http://localhost:3000](http://localhost:3000)
