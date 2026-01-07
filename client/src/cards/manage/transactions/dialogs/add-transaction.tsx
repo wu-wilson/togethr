@@ -31,7 +31,7 @@ const AddTransactionDialog = () => {
     };
     const { added } = await addTransaction(payload as AddTransactionPayload);
     if (isDateInRange(added.transaction_date)) {
-      setTransactions([...transactions!, added]);
+      setTransactions([added, ...transactions!]);
     }
   };
 

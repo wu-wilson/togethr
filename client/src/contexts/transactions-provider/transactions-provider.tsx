@@ -29,7 +29,10 @@ export const TransactionsProvider = ({
         from: dateRange.from!,
         to: dateRange.to!,
       });
-      setTransactions(fetchedTransactions);
+      const sorted = fetchedTransactions.sort((a, b) =>
+        b.transaction_date.localeCompare(a.transaction_date)
+      );
+      setTransactions(sorted);
     } catch {
       setError("getTransactions() endpoint failed.");
     } finally {
