@@ -15,7 +15,7 @@ const AddCategoryDialog = () => {
 
   const onSubmit = async (payload: Record<string, string>) => {
     const { added } = await addCategory(payload as AddCategoryPayload);
-    setCategories([...categories!, added]);
+    setCategories([added, ...categories!]);
   };
 
   return (

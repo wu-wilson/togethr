@@ -15,7 +15,7 @@ const AddMemberDialog = () => {
 
   const onSubmit = async (payload: Record<string, string>) => {
     const { added } = await addMember(payload as AddMemberPayload);
-    setMembers([...members!, added]);
+    setMembers([added, ...members!]);
   };
 
   return (
